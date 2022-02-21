@@ -15,7 +15,10 @@
 ![system](https://user-images.githubusercontent.com/51378715/155024382-dd0fc359-0a77-4605-b7cb-5d8efdfc4f64.png)
 
 ## There is a thesis (Project Work) which discusses the application / system concept in detail:
-The thesis represents a system concept which determines quality indicators of audio devices.
+
+### *Development of an Application to Measure the Quality of Audio Devices using GNU Radio by Bennet L. Ladage*
+
+This thesis represents a system concept which determines quality indicators of audio devices.
 It is implemented by GNU Radio, but the concept is described in a way that other software
 and hardware can realize this system, too. 
 
