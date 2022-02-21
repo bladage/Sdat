@@ -6,7 +6,7 @@
 ### Features:
 - Signal generator: sine, rectangle, saw tooth, triangle, frequency sweeps
 - Adjustable quantization of the signals
-- Time scope and FFT spectrum
+- Output and input signals: Time scope and FFT spectrum
 - SNR, THD+N, gain measurements
 - Data logger which creates CSV-files
 - Adjustable digital input filter
@@ -22,7 +22,7 @@ This thesis represents a system concept which determines quality indicators of a
 It is implemented by GNU Radio, but the concept is described in a way that other software
 and hardware can realize this system, too. 
 
-The considered indicators are the tranfer function, 
+The considered indicators are the transfer function, 
 the signal-to-noise ratio (SNR), the total harmonic distortion (THD), the gain, and the linear
 dynamic range (LDR) of audio equipment. The presented implementation uses the sound card
 of a personal computer (PC) as a measuring instrument. The input of the device under test
