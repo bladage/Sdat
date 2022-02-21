@@ -1,0 +1,3019 @@
+options:
+  parameters:
+    author: Bennet L. Ladage
+    category: '[GRC Hier Blocks]'
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: ''
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: qt_gui
+    hier_block_src_path: '.:'
+    id: Sdat
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: Sdat - Software Defined Audio Testing, South Westphalia University of Applied
+      Sciences, Dept. Meschede
+    window_size: 3000, 3000
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: A_bandwith_classic_sweep
+  id: variable_qtgui_range
+  parameters:
+    comment: normalized bandwith classical sweep
+    gui_hint: 'sweepsTab@0: 0,0,1,1'
+    label: Normalized Bandwidth, CL
+    min_len: '200'
+    orient: Qt.Horizontal
+    rangeType: float
+    start: '0.01'
+    step: '0.01'
+    stop: '1'
+    value: '0.5'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [384, 396]
+    rotation: 0
+    state: enabled
+- name: A_noise_out
+  id: variable_qtgui_range
+  parameters:
+    comment: slider amplitude additive noise
+    gui_hint: 'commonWaveformTab@0: 2,0,1,1'
+    label: Noise Amplitude
+    min_len: '200'
+    orient: Qt.Horizontal
+    rangeType: float
+    start: '0'
+    step: '0.01'
+    stop: '1'
+    value: '0'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [520, 84]
+    rotation: 0
+    state: enabled
+- name: A_out
+  id: variable_qtgui_range
+  parameters:
+    comment: slider amplitude audio out
+    gui_hint: 'generalSettingsTab@0: 2,0,1,1'
+    label: Amplitude
+    min_len: '200'
+    orient: Qt.Horizontal
+    rangeType: float
+    start: '0'
+    step: '0.0001'
+    stop: '1'
+    value: '0.2'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [696, 84.0]
+    rotation: 0
+    state: enabled
+- name: BW_sweep_max
+  id: variable
+  parameters:
+    comment: ''
+    value: 3e3
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [576, 396.0]
+    rotation: 0
+    state: true
+- name: B_sweep
+  id: variable_qtgui_range
+  parameters:
+    comment: bandwith sweep
+    gui_hint: 'sweepsTab@0: 2,0,1,1'
+    label: Bandwidth, BP (Hz)
+    min_len: '200'
+    orient: Qt.Horizontal
+    rangeType: float
+    start: '100'
+    step: '1'
+    stop: BW_sweep_max
+    value: BW_sweep_max / 2.0
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [568, 588]
+    rotation: 0
+    state: enabled
+- name: N_fft
+  id: variable
+  parameters:
+    comment: 'FFT length for SNR/THD calc
+
+      2**14 optimum'
+    value: 2**14
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 1428]
+    rotation: 0
+    state: enabled
+- name: R_update_GUI_numbers
+  id: variable
+  parameters:
+    comment: ''
+    value: '0.1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 1548]
+    rotation: 0
+    state: enabled
+- name: b_qu
+  id: variable_qtgui_chooser
+  parameters:
+    comment: ''
+    gui_hint: 'generalSettingsTab@0: 1,0,1,1'
+    label: Quantization
+    label0: 1 Bit
+    label1: 2 Bit
+    label2: 4 Bit
+    label3: 8 Bit
+    label4: 16 Bit
+    labels: '[]'
+    num_opts: '5'
+    option0: '1'
+    option1: '2'
+    option2: '4'
+    option3: '8'
+    option4: '16'
+    options: '[0, 1, 2]'
+    orient: Qt.QHBoxLayout
+    type: int
+    value: '16'
+    widget: radio_buttons
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1864, 492.0]
+    rotation: 0
+    state: enabled
+- name: b_qu_in
+  id: variable_qtgui_chooser
+  parameters:
+    comment: quantization input
+    gui_hint: 'inputFilterTab@0: 1,0,1,1'
+    label: Quantization
+    label0: 1 Bit
+    label1: 2 Bit
+    label2: 4 Bit
+    label3: 8 Bit
+    label4: 16 Bit
+    labels: '[]'
+    num_opts: '5'
+    option0: '1'
+    option1: '2'
+    option2: '4'
+    option3: '8'
+    option4: '16'
+    options: '[0, 1, 2]'
+    orient: Qt.QVBoxLayout
+    type: int
+    value: '16'
+    widget: radio_buttons
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [856, 852]
+    rotation: 0
+    state: enabled
+- name: bpRipple
+  id: variable_qtgui_chooser
+  parameters:
+    comment: passband ripple FIR filter, win method
+    gui_hint: 'inputFilterTab2@0: 3,0,1,1'
+    label: Max. Stopband Ripple
+    label0: 45 dB
+    label1: 54 dB
+    label2: ''
+    label3: ''
+    label4: ''
+    labels: '["29 dB", "37 dB", "45 dB", "54 dB", "63 dB", "72 dB", "81 dB", "90 dB"]'
+    num_opts: '0'
+    option0: '0'
+    option1: '1'
+    option2: '2'
+    option3: '3'
+    option4: '4'
+    options: '[2, 3, 4, 5, 6, 7, 8, 9]'
+    orient: Qt.QVBoxLayout
+    type: int
+    value: '4'
+    widget: radio_buttons
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [616, 852.0]
+    rotation: 0
+    state: enabled
+- name: delayMeasurement
+  id: variable_qtgui_range
+  parameters:
+    comment: time between a measured value is stored
+    gui_hint: 'tabLogger@0: 1,0,1,1'
+    label: '"Measure Interval (Seconds):"'
+    min_len: '200'
+    orient: Qt.Vertical
+    rangeType: float
+    start: '0.1'
+    step: '0.1'
+    stop: '30'
+    value: '2'
+    widget: counter
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [2256, 2124.0]
+    rotation: 0
+    state: true
+- name: f_0
+  id: variable_qtgui_range
+  parameters:
+    comment: slider frequency audio out
+    gui_hint: 'commonWaveformTab@0: 1,0,1,1'
+    label: Frequency (Hz)
+    min_len: '200'
+    orient: Qt.Horizontal
+    rangeType: float
+    start: '20'
+    step: '1'
+    stop: '20000'
+    value: '1000'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [856, 84.0]
+    rotation: 0
+    state: enabled
+- name: f_center_sweep
+  id: variable_qtgui_range
+  parameters:
+    comment: center frequency sweep
+    gui_hint: 'sweepsTab@0: 1,0,1,1'
+    label: Center Frequency, BP (Hz)
+    min_len: '200'
+    orient: Qt.Horizontal
+    rangeType: float
+    start: 500.0 + 0.5 * BW_sweep_max
+    step: '1'
+    stop: 20e3 - 0.5 * BW_sweep_max
+    value: 10e3
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [384, 588]
+    rotation: 0
+    state: enabled
+- name: fcutoff_in
+  id: variable_qtgui_range
+  parameters:
+    comment: cutoff freq filter input
+    gui_hint: 'inputFilterTab2@0: 2,0,1,1'
+    label: Cutoff Frequency (Hz)
+    min_len: '200'
+    orient: Qt.Horizontal
+    rangeType: float
+    start: trans_width_in
+    step: '1'
+    stop: '20000'
+    value: '6000'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [616, 1028.0]
+    rotation: 0
+    state: enabled
+- name: filenameLog
+  id: variable_qtgui_entry
+  parameters:
+    comment: 'set filename data logger;
+
+      requires from datetime import datetime
+
+      because default name is current date'
+    gui_hint: 'tabLogger@0: 2,0,1,1'
+    label: '"Logfile Name [Confirm New via Enter]"'
+    type: string
+    value: datetime.now().strftime("%Y-%m-%d")
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [2256, 1996.0]
+    rotation: 0
+    state: enabled
+- name: fsample_in
+  id: variable
+  parameters:
+    comment: sample frequency for audio input
+    value: '48000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [16, 1052.0]
+    rotation: 0
+    state: enabled
+- name: fsample_internal
+  id: variable
+  parameters:
+    comment: internal sample frequency (fixed)
+    value: '48000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 252]
+    rotation: 0
+    state: enabled
+- name: fsample_out
+  id: variable
+  parameters:
+    comment: sample frequency for audio output
+    value: '48000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 160]
+    rotation: 0
+    state: enabled
+- name: gain_in
+  id: variable_qtgui_range
+  parameters:
+    comment: gain input
+    gui_hint: 'inputFilterTab2@0: 1,0,1,1'
+    label: Gain (dB)
+    min_len: '200'
+    orient: Qt.Horizontal
+    rangeType: float
+    start: '-60'
+    step: '0.01'
+    stop: '60'
+    value: '0'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [616, 1188.0]
+    rotation: 0
+    state: enabled
+- name: logfileChooser
+  id: variable_qtgui_chooser
+  parameters:
+    comment: choose if logfile is created
+    gui_hint: 'tabLogger@0: 0,0,1,1'
+    label: Logfile Generation
+    label0: No Logfile / Stop
+    label1: Continuous Writing
+    label2: ''
+    label3: ''
+    label4: ''
+    labels: '[]'
+    num_opts: '2'
+    option0: '0'
+    option1: '1'
+    option2: '2'
+    option3: '3'
+    option4: '4'
+    options: '[0, 1, 2]'
+    orient: Qt.QHBoxLayout
+    type: int
+    value: '0'
+    widget: radio_buttons
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [2256, 1812.0]
+    rotation: 0
+    state: enabled
+- name: trans_width_in
+  id: variable
+  parameters:
+    comment: transision width input filter
+    value: 0.5e3
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [16, 1148.0]
+    rotation: 0
+    state: enabled
+- name: uiWaveOrSweep
+  id: variable_qtgui_chooser
+  parameters:
+    comment: choose waveform or sweep
+    gui_hint: 'generalSettingsTab@0: 0,0,1,1'
+    label: Test Signal
+    label0: Common Waveform
+    label1: Classical Sweep (CL)
+    label2: Bandpass Sweep (BP)
+    label3: ''
+    label4: ''
+    labels: '[]'
+    num_opts: '3'
+    option0: '1'
+    option1: '2'
+    option2: '3'
+    option3: '3'
+    option4: '4'
+    options: '[0, 1, 2]'
+    orient: Qt.QVBoxLayout
+    type: int
+    value: '1'
+    widget: radio_buttons
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 348.0]
+    rotation: 0
+    state: enabled
+- name: uiwavef
+  id: variable_qtgui_chooser
+  parameters:
+    comment: choose common waveforms
+    gui_hint: 'commonWaveformTab@0: 0,0,1,1'
+    label: Waveform
+    label0: Sine
+    label1: Square
+    label2: Triangle
+    label3: Sawtooth
+    label4: ''
+    labels: '[]'
+    num_opts: '4'
+    option0: '101'
+    option1: '103'
+    option2: '104'
+    option3: '105'
+    option4: '106'
+    options: '[0, 1, 2]'
+    orient: Qt.QVBoxLayout
+    type: int
+    value: '101'
+    widget: combo_box
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [384, 84]
+    rotation: 0
+    state: enabled
+- name: whichFilterIn
+  id: variable_qtgui_chooser
+  parameters:
+    comment: choose which input filter
+    gui_hint: 'inputFilterTab@0: 0,0,1,1'
+    label: Input Filter
+    label0: Gain Only
+    label1: Lowpass
+    label2: Highpass
+    label3: ''
+    label4: ''
+    labels: '[]'
+    num_opts: '3'
+    option0: '1'
+    option1: '2'
+    option2: '3'
+    option3: '3'
+    option4: '4'
+    options: '[0, 1, 2]'
+    orient: Qt.QVBoxLayout
+    type: int
+    value: '1'
+    widget: radio_buttons
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [416, 852]
+    rotation: 0
+    state: enabled
+- name: analog_noise_source_x_0
+  id: analog_noise_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    amp: A_noise_out/(2.0 ** 0.5)
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    noise_type: analog.GR_GAUSSIAN
+    seed: '0'
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1064, 228]
+    rotation: 0
+    state: enabled
+- name: analog_sig_source_x_0
+  id: analog_sig_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    amp: A_out
+    comment: ''
+    freq: f_0
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    offset: '0'
+    phase: '0'
+    samp_rate: fsample_internal
+    type: float
+    waveform: uiwavef
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1024, 68.0]
+    rotation: 0
+    state: enabled
+- name: audio_sink_0
+  id: audio_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: D/A audio output
+    device_name: ''
+    num_inputs: '1'
+    ok_to_block: 'True'
+    samp_rate: fsample_out
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [2048, 524.0]
+    rotation: 0
+    state: enabled
+- name: audio_source_0
+  id: audio_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: A/D audio input
+    device_name: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_outputs: '1'
+    ok_to_block: 'True'
+    samp_rate: fsample_in
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [992, 932]
+    rotation: 0
+    state: enabled
+- name: blk_oscillate_around_0
+  id: epy_block
+  parameters:
+    _source_code: "import numpy as np\nfrom gnuradio import gr\n\n\nclass blk(gr.sync_block):\n\
+      \n    def __init__(self):\n\n        gr.sync_block.__init__(\n            self,\n\
+      \            name='Oscillate Around 0', \n            in_sig=[np.float32],\n\
+      \            out_sig=[np.float32]\n        )\n\n    def work(self, input_items,\
+      \ output_items):\n        #Check if s(n)>0 for all n\n        #if all(n >= 0\
+      \ for n in input_items[0]):\n        if min(input_items[0]) >= 0:       \n \
+      \           output_items[0][:] = 2 * (input_items[0] - (0.5*max(input_items[0]))\
+      \ )\n        else:\n            output_items[0][:] = input_items[0]\n      \
+      \  return len(output_items[0])\n"
+    affinity: ''
+    alias: ''
+    comment: and correct amplitude
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    _io_cache: ('Oscillate Around 0', 'blk', [], [('0', 'float', 1)], [('0', 'float',
+      1)], '', [])
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1304, 112.0]
+    rotation: 0
+    state: enabled
+- name: blk_oscillate_around_0_0
+  id: epy_block
+  parameters:
+    _source_code: "import numpy as np\nfrom gnuradio import gr\n\n\nclass blk(gr.sync_block):\n\
+      \n    def __init__(self, digits=1):\n\n        gr.sync_block.__init__(\n   \
+      \         self,\n            name=\"round x digits\", \n            in_sig=[np.float32],\n\
+      \            out_sig=[np.float32]\n        )\n        self.digits = digits\n\
+      \n    def work(self, input_items, output_items):\n        \n        output_items[0][:]\
+      \ = np.round(input_items[0], self.digits)\n        return len(output_items[0])\n"
+    affinity: ''
+    alias: ''
+    comment: round(s(n), x)
+    digits: '2'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    _io_cache: ('round x digits', 'blk', [('digits', '1')], [('0', 'float', 1)], [('0',
+      'float', 1)], '', ['digits'])
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1840, 1596.0]
+    rotation: 0
+    state: enabled
+- name: blocks_add_xx_0
+  id: blocks_add_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1512, 216]
+    rotation: 0
+    state: enabled
+- name: blocks_add_xx_1
+  id: blocks_add_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '3'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1776, 856.0]
+    rotation: 0
+    state: enabled
+- name: blocks_add_xx_1_0
+  id: blocks_add_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '3'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1800, 408]
+    rotation: 0
+    state: enabled
+- name: blocks_complex_to_mag_0
+  id: blocks_complex_to_mag
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: '|S(k)|'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: N_fft
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1064, 1804]
+    rotation: 0
+    state: enabled
+- name: blocks_complex_to_mag_0_0
+  id: blocks_complex_to_mag
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: '|S(k)|'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: N_fft
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1080, 1420]
+    rotation: 0
+    state: enabled
+- name: blocks_divide_xx_0
+  id: blocks_divide_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: gain = in / out
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1656, 1584.0]
+    rotation: 0
+    state: enabled
+- name: blocks_multiply_const_xx_1
+  id: blocks_multiply_const_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: Gain Input
+    const: 10.0 ** (gain_in/20.0)
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1160, 932.0]
+    rotation: 0
+    state: enabled
+- name: blocks_multiply_const_xx_2
+  id: blocks_multiply_const_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: amplitude classical sweep
+    const: A_out
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1392, 436]
+    rotation: 0
+    state: enabled
+- name: blocks_multiply_const_xx_2_0
+  id: blocks_multiply_const_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: amplitude bandpass sweep
+    const: A_out
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1408, 628]
+    rotation: 0
+    state: enabled
+- name: blocks_nlog10_ff_1
+  id: blocks_nlog10_ff
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: dB
+    k: '0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    n: '10'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1752, 1596.0]
+    rotation: 0
+    state: enabled
+- name: blocks_null_sink_0
+  id: blocks_null_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    bus_structure_sink: '[[0,],]'
+    comment: "strange behavior: \nnull sink clears input buffer of the data logger"
+    num_inputs: '1'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [2296, 1560.0]
+    rotation: 0
+    state: enabled
+- name: blocks_stream_to_vector_0
+  id: blocks_stream_to_vector
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_items: N_fft
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [544, 1808.0]
+    rotation: 0
+    state: enabled
+- name: blocks_stream_to_vector_0_0
+  id: blocks_stream_to_vector
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_items: N_fft
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [592, 1424.0]
+    rotation: 0
+    state: enabled
+- name: blocks_vco_f_0
+  id: blocks_vco_f
+  parameters:
+    affinity: ''
+    alias: ''
+    amplitude: '1'
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: fsample_internal
+    sensitivity: 2*np.pi*22000
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1000, 420]
+    rotation: 0
+    state: enabled
+- name: channels_quantizer_0
+  id: channels_quantizer
+  parameters:
+    affinity: ''
+    alias: ''
+    bits: b_qu
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1904, 436]
+    rotation: 0
+    state: enabled
+- name: channels_quantizer_0_0
+  id: channels_quantizer
+  parameters:
+    affinity: ''
+    alias: ''
+    bits: b_qu_in
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1880, 884.0]
+    rotation: 0
+    state: enabled
+- name: commonWaveformTab
+  id: qtgui_tab_widget
+  parameters:
+    alias: ''
+    comment: tab settings common wf
+    gui_hint: 'outOrInTab@0: 1,0,1,1'
+    label0: 'Common Waveform '
+    label1: Input Signal
+    label10: Tab 10
+    label11: Tab 11
+    label12: Tab 12
+    label13: Tab 13
+    label14: Tab 14
+    label15: Tab 15
+    label16: Tab 16
+    label17: Tab 17
+    label18: Tab 18
+    label19: Tab 19
+    label2: Bandpass Sweep
+    label3: Tab 3
+    label4: Tab 4
+    label5: Tab 5
+    label6: Tab 6
+    label7: Tab 7
+    label8: Tab 8
+    label9: Tab 9
+    num_tabs: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [160, 668.0]
+    rotation: 0
+    state: enabled
+- name: const_out_max_1_0_0
+  id: epy_block
+  parameters:
+    _source_code: "from gnuradio import gr\nfrom scipy import signal\nimport numpy\
+      \ as np\n\n\nclass blk(gr.sync_block):\n\n    def __init__(self, fcenter=1000.0,\
+      \ bw = 100.0, stopband_ripple = 40.0, passband_ripple=0.2, order = 11, fsample=48000.0):\
+      \  # only default arguments here\n        \"\"\"\n        Band-pass IIR filter\
+      \ (Cheby1) implemented by cascaded second order sections (SOS),\n        SOS\
+      \ better because coefficient quantization and stability\n        ---\n     \
+      \   Bennet L. Ladage\n        Project Work \"Sdat\"\n        2022-02-08 \n \
+      \       ---  \n\n        input:\n            in0: x(n), i.e., signal in the\
+      \ time domain\n        \n        arguments:\n            fcenter:         center\
+      \ frequency in Hz\n            bw:              bandwidth in Hz\n          \
+      \  stopband_ripple: ~ in dB\n            passband_ripple: ~ in dB\n        \
+      \    order:           order of the IIR filter\n            fsample:        \
+      \ sample frequency in Hz\n      \n        output:\n            out0: y(n), i.e.,\
+      \ filtered signal x(n)\n        \"\"\"\n        gr.sync_block.__init__(\n  \
+      \          self,\n            name='Band Pass IIR (Cheby1)',\n            in_sig=[np.float32],\n\
+      \            out_sig=[np.float32]\n        )\n        self.fcenter = fcenter\n\
+      \        self.bw = bw\n        self.stopband_ripple = stopband_ripple\n    \
+      \    self.passband_ripple = passband_ripple\n        self.order = order\n  \
+      \      self.fsample = fsample    \n        \n\n    def work(self, input_items,\
+      \ output_items):\n        \n        #                        #\n        # IIR\
+      \ BPass, Butterworth #\n        #                        #\n        f_lo = self.fcenter\
+      \ - 0.5 * self.bw\n        f_hi = self.fcenter + 0.5 * self.bw\n        sos\
+      \ = signal.iirfilter(self.order, [f_lo, f_hi], rs=self.stopband_ripple, rp=self.passband_ripple,\
+      \ btype='band', analog=False, ftype='cheby1', fs=self.fsample, output='sos')\
+      \ \n        \n        #                        #\n        # Just filter if stable\
+      \  #\n        #                        #\n        z, p, k = signal.sos2zpk(sos)\
+      \ \n        if np.any(abs(p) >= 1):\n            output_items[0][:] = 0\n  \
+      \      else:\n            output_items[0][:] = signal.sosfilt(sos, input_items[0][:])\
+      \        \n    \n        return len(output_items[0])\n"
+    affinity: ''
+    alias: ''
+    bw: B_sweep
+    comment: ''
+    fcenter: f_center_sweep
+    fsample: fsample_internal
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    order: '11'
+    passband_ripple: '0.2'
+    stopband_ripple: '60.0'
+  states:
+    _io_cache: '(''Band Pass IIR (Cheby1)'', ''blk'', [(''fcenter'', ''1000.0''),
+      (''bw'', ''100.0''), (''stopband_ripple'', ''40.0''), (''passband_ripple'',
+      ''0.2''), (''order'', ''11''), (''fsample'', ''48000.0'')], [(''0'', ''float'',
+      1)], [(''0'', ''float'', 1)], ''\n        Band-pass IIR filter (Cheby1) implemented
+      by cascaded second order sections (SOS),\n        SOS better because coefficient
+      quantization and stability\n        ---\n        Bennet L. Ladage\n        Project
+      Work "Sdat"\n        2022-02-08 \n        ---  \n\n        input:\n            in0:
+      x(n), i.e., signal in the time domain\n        \n        arguments:\n            fcenter:         center
+      frequency in Hz\n            bw:              bandwidth in Hz\n            stopband_ripple:
+      ~ in dB\n            passband_ripple: ~ in dB\n            order:           order
+      of the IIR filter\n            fsample:         sample frequency in Hz\n      \n        output:\n            out0:
+      y(n), i.e., filtered signal x(n)\n        '', [''bw'', ''fcenter'', ''fsample'',
+      ''order'', ''passband_ripple'', ''stopband_ripple''])'
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1192, 588.0]
+    rotation: 0
+    state: enabled
+- name: const_out_max_1_0_0_0
+  id: epy_block
+  parameters:
+    _source_code: "from gnuradio import gr\nfrom scipy import signal\nimport numpy\
+      \ as np\n\n\nclass blk(gr.sync_block):\n\n    def __init__(self, fcutoff=1000.0,\
+      \ stopband_ripple = 40.0, passband_ripple=0.2, order = 11, fsample=48000.0):\
+      \  \n        \"\"\"\n        Low-pass IIR filter (Cheby1) implemented by cascaded\
+      \ second order sections (SOS),\n        SOS better because coefficient quantization\
+      \ and stability\n        ---\n        Bennet L. Ladage\n        Project Work\
+      \ \"Sdat\"\n        2022-02-08 \n        ---    \n\n        input:\n       \
+      \     in0: x(n), i.e., signal in the time domain\n        \n        arguments:\n\
+      \            fcutoff:         cutoff frequency in Hz\n            stopband_ripple:\
+      \ ~ in dB\n            passband_ripple: ~ in dB\n            order:        \
+      \   order of the IIR filter\n            fsample:         sample frequency in\
+      \ Hz\n      \n        output:\n            out0: y(n), i.e., filtered signal\
+      \ x(n)\n        \"\"\"\n        gr.sync_block.__init__(\n            self,\n\
+      \            name='Low Pass IIR (Cheby1)',\n            in_sig=[np.float32],\n\
+      \            out_sig=[np.float32]\n        )\n        self.fcutoff = fcutoff\n\
+      \        self.stopband_ripple = stopband_ripple\n        self.passband_ripple\
+      \ = passband_ripple\n        self.order = order\n        self.fsample = fsample\
+      \    \n        \n\n    def work(self, input_items, output_items):\n        \
+      \    \n        #                        #\n        # IIR LPass, Cheby1     \
+      \ #\n        #                        #\n        sos = signal.iirfilter(self.order,\
+      \ self.fcutoff, rs=self.stopband_ripple, rp=self.passband_ripple, btype='low',\
+      \ analog=False, ftype='cheby1', fs=self.fsample, output='sos')\n        \n \
+      \       #                        #\n        # Just filter if stable  #\n   \
+      \     #                        #\n        z, p, k = signal.sos2zpk(sos) \n \
+      \       if np.any(abs(p) >= 1):\n            output_items[0][:] = 0\n      \
+      \  else:\n            output_items[0][:] = signal.sosfilt(sos, input_items[0][:])\
+      \               \n                 \n        return len(output_items[0])\n"
+    affinity: ''
+    alias: ''
+    comment: vco80
+    fcutoff: A_bandwith_classic_sweep*20e3
+    fsample: fsample_internal
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    order: '7'
+    passband_ripple: '0.2'
+    stopband_ripple: '60.0'
+  states:
+    _io_cache: '(''Low Pass IIR (Cheby1)'', ''blk'', [(''fcutoff'', ''1000.0''), (''stopband_ripple'',
+      ''40.0''), (''passband_ripple'', ''0.2''), (''order'', ''11''), (''fsample'',
+      ''48000.0'')], [(''0'', ''float'', 1)], [(''0'', ''float'', 1)], ''\n        Low-pass
+      IIR filter (Cheby1) implemented by cascaded second order sections (SOS),\n        SOS
+      better because coefficient quantization and stability\n        ---\n        Bennet
+      L. Ladage\n        Project Work "Sdat"\n        2022-02-08 \n        ---    \n\n        input:\n            in0:
+      x(n), i.e., signal in the time domain\n        \n        arguments:\n            fcutoff:         cutoff
+      frequency in Hz\n            stopband_ripple: ~ in dB\n            passband_ripple:
+      ~ in dB\n            order:           order of the IIR filter\n            fsample:         sample
+      frequency in Hz\n      \n        output:\n            out0: y(n), i.e., filtered
+      signal x(n)\n        '', [''fcutoff'', ''fsample'', ''order'', ''passband_ripple'',
+      ''stopband_ripple''])'
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1184, 404.0]
+    rotation: 0
+    state: enabled
+- name: const_out_max_2_0
+  id: epy_block
+  parameters:
+    Delta_f: '150.0'
+    _source_code: "from gnuradio import gr\nimport numpy as np\nfrom copy import copy\n\
+      \n\nclass blk(gr.sync_block):  # sync_block; other base classes are basic_block,\
+      \ decim_block, interp_block\n\n    def __init__(self, fsample=48000.0, Delta_f=120.0,\
+      \ fbackup=100):  # only default arguments here\n        \"\"\"\n           \
+      \ Compute the SNR, THD and signal energy of a magnitude spectrum.\n        \
+      \    ---\n            Bennet L. Ladage\n            Project Work \"Sdat\"\n\
+      \            2022-02-08 \n            ---             \n\n            input:\n\
+      \                in0: magnitude spectrum (FFT), two-sided, length 2^14  \n\n\
+      \            arguments:\n                fsample: sampling frequency in Hz\n\
+      \                Delta_f: bandwidth of the bandpass or bandreject filter in\
+      \ Hz; 150 Hz leads to SQNR = 97..98 dB   \n                fbackup: frequency\
+      \ if estimation of the real center freq fails\n            \n            output:\n\
+      \                out0: SNR in dB\n                out1: THD (fundamental) in\
+      \ %\n                out2: P_s, i.e., half of the signal power\n        \"\"\
+      \"\n        gr.sync_block.__init__(\n            self,\n            name='SNR,\
+      \ THD and Power Estimator',\n            in_sig=[(np.float32, 2**14)],\n   \
+      \         out_sig=[(np.float32, 1), (np.float32, 1), (np.float32, 1)]\n    \
+      \    )\n        self.fsample = fsample\n        self.Delta_f = Delta_f\n   \
+      \     self.fbackup = fbackup\n\n\n    def work(self, input_items, output_items):\n\
+      \        \n        N = int(2**13) # signal's length/2\n        \n        # \
+      \                                                                         #\n\
+      \        # Check if all input values are 0; if yes, then don't calc SNR, THD,\
+      \ P_s   # \n        #                                                      \
+      \                    #   \n        if (not np.any(input_items[0][0][0:N])):\n\
+      \n            SNR = 0\n            THD = 0                        \n       \
+      \     P_s = 1         \n\n        else:\n\n            #                   \
+      \ #\n            # Estimate Frequency #\n            #                    #\n\
+      \            # single-sided spectrum; 2.0 due to half of the energy is missing\
+      \ when one side is truncated:\n            X_pos = np.array(input_items[0][0][0:N])\
+      \ # or N/2 if 2^14=N\n                    \n            m_k = np.argmax(X_pos)\
+      \                  # get index of peak                               \n    \
+      \        C3 = 1.75*(X_pos[m_k-1] - X_pos[m_k+1])/(X_pos[m_k-1] + X_pos[m_k]\
+      \ + X_pos[m_k+1]) # 1.75 depends on window, see Lyons (p. 733, understanding\
+      \ digital signal processing)\n            m_peak = m_k + C3                \
+      \       # estimate real peak; C3 because has already abs & more accurate\n \
+      \           f_peak = m_peak * self.fsample / N      # calc estimated fundamental\
+      \ with estimated index m_peak\n            \n            if f_peak <= 0.0:\n\
+      \                f_peak = self.fbackup               # estimation fails, hence\
+      \ use fbackup\n      \n            #                      #\n            # Filter:\
+      \ SNR & THD    #      \n            #                      #\n\n           \
+      \ # 1. specification \"filter\" #              \n            f_lo = f_peak -\
+      \ self.Delta_f            # low cutoff freq\n            if f_lo < 0.0:\n  \
+      \              f_lo = 0                            # avoid negative f_lo\n \
+      \           \n            f_hi = f_peak + self.Delta_f            # high cutoff\
+      \ freq\n            \n            # 2. bins #\n            k_lo = round(N *\
+      \ (f_lo / self.fsample)) # bin of f_lo\n            k_hi = round(N * (f_hi /\
+      \ self.fsample)) # bin of f_hi\n            \n            # 3. apply filter\
+      \ #               \n            Sk_bp = copy(X_pos)                     # copy\
+      \ because of python's handling of arrays\n\n            # BRej:\n          \
+      \  X_pos[int(k_lo):int(k_hi)+1] = 0\n            P_n = np.mean(X_pos**2)   \
+      \        # P noise\n\n            # BPass:\n            Sk_bp[0:int(k_lo)] =\
+      \ 0\n            Sk_bp[int(k_hi)+1:N] = 0\n            P_s = np.mean(Sk_bp**2)\
+      \           # P signal\n            \n            # 4. SNR/THD calc #\n    \
+      \        SNR = round(10.0 * np.log10(P_s/P_n), 2)\n            THD = round(100.0*np.sqrt(P_n/P_s),\
+      \ 4)\n        \n        output_items[0][:] = SNR                # out0=SNR\n\
+      \        output_items[1][:] = THD                # out1=THD\n        output_items[2][:]\
+      \ = P_s                # out2=P_s\n        return len(output_items[0])     \
+      \   \n\n"
+    affinity: ''
+    alias: ''
+    comment: 'out0=SNR
+
+      out1=THD
+
+      out2=input''s signal power
+
+      in0=|S(k)|
+
+      length=2**14'
+    fbackup: f_0
+    fsample: '48000.0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    _io_cache: '(''SNR, THD and Power Estimator'', ''blk'', [(''fsample'', ''48000.0''),
+      (''Delta_f'', ''120.0''), (''fbackup'', ''100'')], [(''0'', ''float'', 16384)],
+      [(''0'', ''float'', 1), (''1'', ''float'', 1), (''2'', ''float'', 1)], ''\n            Compute
+      the SNR, THD and signal energy of a magnitude spectrum.\n            ---\n            Bennet
+      L. Ladage\n            Project Work "Sdat"\n            2022-02-08 \n            ---             \n\n            input:\n                in0:
+      magnitude spectrum (FFT), two-sided, length 2^14  \n\n            arguments:\n                fsample:
+      sampling frequency in Hz\n                Delta_f: bandwidth of the bandpass
+      or bandreject filter in Hz; 150 Hz leads to SQNR = 97..98 dB   \n                fbackup:
+      frequency if estimation of the real center freq fails\n            \n            output:\n                out0:
+      SNR in dB\n                out1: THD (fundamental) in %\n                out2:
+      P_s, i.e., half of the signal power\n        '', [''Delta_f'', ''fbackup'',
+      ''fsample''])'
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1328, 1776]
+    rotation: 0
+    state: enabled
+- name: const_out_max_2_0_0_0
+  id: epy_block
+  parameters:
+    _source_code: "from gnuradio import gr\nimport numpy as np\nfrom copy import copy\n\
+      \n\nclass blk(gr.sync_block):  # sync_block; other base classes are basic_block,\
+      \ decim_block, interp_block\n\n    def __init__(self, fsample=48000.0, fbackup=100):\
+      \  # only default arguments here ; , wf=101\n        \"\"\"\n            Compute\
+      \ the SNR, THD and signal energy of a magnitude spectrum            \n\n   \
+      \         input:\n                in0: magnitude spectrum (FFT), two-sided,\
+      \ (N_fft/2) already removed(!), length 2^14  \n\n            arguments:\n  \
+      \              fsample: sampling frequency in Hz\n                fbackup: frequency\
+      \ if estimation of the real center freq fails\n            \n            output:\n\
+      \                out0: SNR in dB\n                out1: THD (fundamental) in\
+      \ %\n                out2: P_s, (i.e., signal power)\n        \"\"\"\n     \
+      \   gr.sync_block.__init__(\n            self,\n            name='SNR, THD and\
+      \ Power Estimator',\n            in_sig=[(np.float32, 2**14)],\n           \
+      \ out_sig=[(np.float32, 1), (np.float32, 1), (np.float32, 1)] # , (np.float32,\
+      \ 2**13)\n        )\n        self.fsample = fsample\n        self.fbackup =\
+      \ fbackup\n#        self.wf = wf\n\n\n    def work(self, input_items, output_items):\n\
+      \        \n        N = 2**14 # signal's length\n        \n        #        \
+      \                                                                  #\n     \
+      \   # Check if all input values are 0; if yes, then don't calc SNR, THD, P_s\
+      \   # \n        #                                                          \
+      \                #   \n        if (not np.any(input_items[0][0][0:(N/2)])):\n\
+      \n            SNR = 0\n            THD = 0                        \n       \
+      \     P_s = 1         \n\n        else:\n\n            #                   \
+      \ #\n            # Estimate Frequency #\n            #                    #\n\
+      \            # one-sided spectrum; 2.0 due to half of the energy is missing\
+      \ when one side is truncated:\n            X_pos = np.array(2.0 * input_items[0][0][0:(N/2)])\n\
+      \                    \n            m_k = np.argmax(X_pos)                  #\
+      \ get index of peak\n            P = 1.75                                # depends\
+      \ on window, see Lyons (p. 733, understanding digital signal processing)\n \
+      \           C3 = P*(X_pos[m_k-1] - X_pos[m_k+1])/(X_pos[m_k-1] + X_pos[m_k]\
+      \ + X_pos[m_k+1])\n            m_peak = m_k + C3                       # estimate\
+      \ real peak; C3 because has already abs & more accurate\n            f_peak\
+      \ = m_peak * self.fsample / N      # calc estimated fundamental with estimated\
+      \ index m_peak\n            \n            if f_peak <= 0.0:\n              \
+      \  f_peak = self.fbackup               # estimation fails, hence use fbackup\n\
+      \      \n            #                      #\n            # Filter: SNR & THD\
+      \    #      \n            #                      #\n\n            # 1. specification\
+      \ \"filter\" #\n            nyq_rate = self.fsample / 2.0           # nyquist\
+      \ rate\n            transitionWidthHz = 20.0                # transition width\
+      \ in Hz\n            width = transitionWidthHz / nyq_rate    # normalize freq\n\
+      \n            Delta_f = 120.0 # 250 fir               # bandwidth filter\n \
+      \           f_lo = f_peak - Delta_f                 # low cutoff freq\n    \
+      \        if f_lo < 0.0:\n                f_lo = 0                          \
+      \  # avoid negative f_lo\n            \n            f_hi = f_peak + Delta_f\
+      \                 # high cutoff freq\n            \n            # 2. bins #\n\
+      \            k_lo = round(N * (f_lo / self.fsample)) # bin of f_lo\n       \
+      \     k_hi = round(N * (f_hi / self.fsample)) # bin of f_hi\n            \n\
+      \            # 3. apply filter #               \n            Sk_bp = copy(X_pos)\
+      \                     # copy because of python's handling of arrays\n\n    \
+      \        # BRej:\n            X_pos[int(k_lo):int(k_hi)+1] = 0\n           \
+      \ P_n = np.mean(X_pos**2)                 # P noise\n\n            # BPass:\n\
+      \            Sk_bp[0:int(k_lo)] = 0\n            Sk_bp[int(k_hi)+1:N] = 0\n\
+      \            P_s = np.mean(Sk_bp**2)                 # P signal\n\n#       \
+      \     if self.wf != 101:\n#                # adjust the following block by gnu\
+      \ radio's estimated values\n#                f_1 = f_peak # in Hz\n#       \
+      \         Delta_k = round(N * f_1 / self.fsample)    # samples between each\
+      \ harmonic\n#  \n#                f_max = 20000  # audio 20 kHz; 100 Hz just\
+      \ example here\n#                m_max = int(round(f_max / f_1))  # 2* because\
+      \ one sided spec here?; number harmonics + fundamental; gnu without??\n#\n#\
+      \                #k_lo = 4    # val computed peak finder in gnu radio...\n#\
+      \                #k_hi = 6\n#\n#                # the following locs should\
+      \ be okay in gnu radio, just delete the print(...)\n#                m_vec =\
+      \ np.arange(1, m_max)  # +1 because of python's function\n#                i_vec\
+      \ = np.ones(m_max-1)\n#\n#                k_lo_vec = k_lo * i_vec + Delta_k\
+      \ * m_vec  # k^(m)_lo = k_lo + m Delta_k written as vector operations\n#   \
+      \             k_lo_vec = k_lo_vec.astype(int)\n#                k_hi_vec = k_hi\
+      \ * i_vec + Delta_k * m_vec  # k^(m)_hi = k_hi + m Delta_k written as vector\
+      \ operations\n#                k_hi_vec = k_hi_vec.astype(int)\n#\n#       \
+      \         del_vec = np.arange(k_lo_vec[0], k_hi_vec[0]+1)\n#               \
+      \ for idx in range(1, len(k_lo_vec)):\n#                    del_vec = np.append(del_vec,\
+      \ np.arange(k_lo_vec[idx], k_hi_vec[idx]+1))\n#\n#                # filter harmonics;\
+      \ -1 because array starts at 0 plus -1 because k_hi_vec[idx]+1 not for the last\
+      \ element, hence -2\n#                #Sk[del_vec[0:len(del_vec)-2]] = 0\n#\
+      \                X_pos[del_vec[0:len(del_vec)-2]] = 0\n                  \n\
+      \            \n            # 4. SNR/THD calc #\n            #P_n = 2.0 * np.mean(X_pos**2)\
+      \ \n\n            SNR = 10.0 * np.log10(P_s/P_n)#-0.7\n            THD = 100.0*np.sqrt(P_n/P_s)\
+      \ #*1/1.08\n        \n        output_items[0][:] = SNR                # out0=SNR\n\
+      \        output_items[1][:] = THD                # out1=THD\n        output_items[2][:]\
+      \ = P_s                # out2=P_s\n        #output_items[3][0][:] = X_pos\n\
+      \        return len(output_items[0])        \n\n"
+    affinity: ''
+    alias: ''
+    comment: 'out0=SNR
+
+      out1=THD
+
+      out2=output''s signal power
+
+      in0=|S(k)|
+
+      length=2**14'
+    fbackup: f_0
+    fsample: '48000.0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    _io_cache: '(''SNR, THD and Power Estimator'', ''blk'', [(''fsample'', ''48000.0''),
+      (''fbackup'', ''100'')], [(''0'', ''float'', 16384)], [(''0'', ''float'', 1),
+      (''1'', ''float'', 1), (''2'', ''float'', 1)], ''\n            Compute the SNR,
+      THD and signal energy of a magnitude spectrum            \n\n            input:\n                in0:
+      magnitude spectrum (FFT), two-sided, (N_fft/2) already removed(!), length 2^14  \n\n            arguments:\n                fsample:
+      sampling frequency in Hz\n                fbackup: frequency if estimation of
+      the real center freq fails\n            \n            output:\n                out0:
+      SNR in dB\n                out1: THD (fundamental) in %\n                out2:
+      P_s, (i.e., signal power)\n        '', [''fbackup'', ''fsample''])'
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1000, 1600]
+    rotation: 0
+    state: disabled
+- name: const_out_max_2_0_1
+  id: epy_block
+  parameters:
+    Delta_f: '250.0'
+    _source_code: "from gnuradio import gr\nimport numpy as np\nfrom copy import copy\n\
+      \n\nclass blk(gr.sync_block):  # sync_block; other base classes are basic_block,\
+      \ decim_block, interp_block\n\n    def __init__(self, fsample=48000.0, Delta_f=120.0,\
+      \ fbackup=100):  # only default arguments here\n        \"\"\"\n           \
+      \ Compute the SNR, THD and signal energy of a magnitude spectrum.\n        \
+      \    ---\n            Bennet L. Ladage\n            Project Work \"Sdat\"\n\
+      \            2022-02-08 \n            ---             \n\n            input:\n\
+      \                in0: magnitude spectrum (FFT), two-sided, length 2^14  \n\n\
+      \            arguments:\n                fsample: sampling frequency in Hz\n\
+      \                Delta_f: bandwidth of the bandpass or bandreject filter in\
+      \ Hz; 150 Hz leads to SQNR = 97..98 dB   \n                fbackup: frequency\
+      \ if estimation of the real center freq fails\n            \n            output:\n\
+      \                out0: SNR in dB\n                out1: THD (fundamental) in\
+      \ %\n                out2: P_s, i.e., half of the signal power\n        \"\"\
+      \"\n        gr.sync_block.__init__(\n            self,\n            name='SNR,\
+      \ THD and Power Estimator',\n            in_sig=[(np.float32, 2**14)],\n   \
+      \         out_sig=[(np.float32, 1), (np.float32, 1), (np.float32, 1)]\n    \
+      \    )\n        self.fsample = fsample\n        self.Delta_f = Delta_f\n   \
+      \     self.fbackup = fbackup\n\n\n    def work(self, input_items, output_items):\n\
+      \        \n        N = int(2**13) # signal's length/2\n        \n        # \
+      \                                                                         #\n\
+      \        # Check if all input values are 0; if yes, then don't calc SNR, THD,\
+      \ P_s   # \n        #                                                      \
+      \                    #   \n        if (not np.any(input_items[0][0][0:N])):\n\
+      \n            SNR = 0\n            THD = 0                        \n       \
+      \     P_s = 1         \n\n        else:\n\n            #                   \
+      \ #\n            # Estimate Frequency #\n            #                    #\n\
+      \            # single-sided spectrum; 2.0 due to half of the energy is missing\
+      \ when one side is truncated:\n            X_pos = np.array(input_items[0][0][0:N])\
+      \ # or N/2 if 2^14=N\n                    \n            m_k = np.argmax(X_pos)\
+      \                  # get index of peak                               \n    \
+      \        C3 = 1.75*(X_pos[m_k-1] - X_pos[m_k+1])/(X_pos[m_k-1] + X_pos[m_k]\
+      \ + X_pos[m_k+1]) # 1.75 depends on window, see Lyons (p. 733, understanding\
+      \ digital signal processing)\n            m_peak = m_k + C3                \
+      \       # estimate real peak; C3 because has already abs & more accurate\n \
+      \           f_peak = m_peak * self.fsample / N      # calc estimated fundamental\
+      \ with estimated index m_peak\n            \n            if f_peak <= 0.0:\n\
+      \                f_peak = self.fbackup               # estimation fails, hence\
+      \ use fbackup\n      \n            #                      #\n            # Filter:\
+      \ SNR & THD    #      \n            #                      #\n\n           \
+      \ # 1. specification \"filter\" #              \n            f_lo = f_peak -\
+      \ self.Delta_f            # low cutoff freq\n            if f_lo < 0.0:\n  \
+      \              f_lo = 0                            # avoid negative f_lo\n \
+      \           \n            f_hi = f_peak + self.Delta_f            # high cutoff\
+      \ freq\n            \n            # 2. bins #\n            k_lo = round(N *\
+      \ (f_lo / self.fsample)) # bin of f_lo\n            k_hi = round(N * (f_hi /\
+      \ self.fsample)) # bin of f_hi\n            \n            # 3. apply filter\
+      \ #               \n            Sk_bp = copy(X_pos)                     # copy\
+      \ because of python's handling of arrays\n\n            # BRej:\n          \
+      \  X_pos[int(k_lo):int(k_hi)+1] = 0\n            P_n = np.mean(X_pos**2)   \
+      \        # P noise\n\n            # BPass:\n            Sk_bp[0:int(k_lo)] =\
+      \ 0\n            Sk_bp[int(k_hi)+1:N] = 0\n            P_s = np.mean(Sk_bp**2)\
+      \           # P signal\n            \n            # 4. SNR/THD calc #\n    \
+      \        SNR = round(10.0 * np.log10(P_s/P_n), 2)\n            THD = round(100.0*np.sqrt(P_n/P_s),\
+      \ 4)\n        \n        output_items[0][:] = SNR                # out0=SNR\n\
+      \        output_items[1][:] = THD                # out1=THD\n        output_items[2][:]\
+      \ = P_s                # out2=P_s\n        return len(output_items[0])     \
+      \   \n\n"
+    affinity: ''
+    alias: ''
+    comment: 'out0=SNR
+
+      out1=THD
+
+      out2=output''s signal power
+
+      in0=|S(k)|
+
+      length=2**14'
+    fbackup: f_0
+    fsample: '48000.0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    _io_cache: '(''SNR, THD and Power Estimator'', ''blk'', [(''fsample'', ''48000.0''),
+      (''Delta_f'', ''120.0''), (''fbackup'', ''100'')], [(''0'', ''float'', 16384)],
+      [(''0'', ''float'', 1), (''1'', ''float'', 1), (''2'', ''float'', 1)], ''\n            Compute
+      the SNR, THD and signal energy of a magnitude spectrum.\n            ---\n            Bennet
+      L. Ladage\n            Project Work "Sdat"\n            2022-02-08 \n            ---             \n\n            input:\n                in0:
+      magnitude spectrum (FFT), two-sided, length 2^14  \n\n            arguments:\n                fsample:
+      sampling frequency in Hz\n                Delta_f: bandwidth of the bandpass
+      or bandreject filter in Hz; 150 Hz leads to SQNR = 97..98 dB   \n                fbackup:
+      frequency if estimation of the real center freq fails\n            \n            output:\n                out0:
+      SNR in dB\n                out1: THD (fundamental) in %\n                out2:
+      P_s, i.e., half of the signal power\n        '', [''Delta_f'', ''fbackup'',
+      ''fsample''])'
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1336, 1392]
+    rotation: 0
+    state: enabled
+- name: fft_vxx_0
+  id: fft_vxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    fft_size: N_fft
+    forward: 'True'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    nthreads: '1'
+    shift: 'True'
+    type: float
+    window: window.blackman(N_fft)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [720, 1780]
+    rotation: 0
+    state: enabled
+- name: fft_vxx_0_0
+  id: fft_vxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    fft_size: N_fft
+    forward: 'True'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    nthreads: '1'
+    shift: 'True'
+    type: float
+    window: window.blackman(N_fft)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [776, 1396]
+    rotation: 0
+    state: enabled
+- name: generalSettingsTab
+  id: qtgui_tab_widget
+  parameters:
+    alias: ''
+    comment: tab general settings
+    gui_hint: 'outOrInTab@0: 0,0,1,1'
+    label0: General Settings
+    label1: Input Signal
+    label10: Tab 10
+    label11: Tab 11
+    label12: Tab 12
+    label13: Tab 13
+    label14: Tab 14
+    label15: Tab 15
+    label16: Tab 16
+    label17: Tab 17
+    label18: Tab 18
+    label19: Tab 19
+    label2: Bandpass Sweep
+    label3: Tab 3
+    label4: Tab 4
+    label5: Tab 5
+    label6: Tab 6
+    label7: Tab 7
+    label8: Tab 8
+    label9: Tab 9
+    num_tabs: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [160, 572.0]
+    rotation: 0
+    state: enabled
+- name: high_pass_filter_0
+  id: high_pass_filter
+  parameters:
+    affinity: ''
+    alias: ''
+    beta: bpRipple
+    comment: ''
+    cutoff_freq: fcutoff_in
+    decim: '1'
+    gain: '1'
+    interp: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: fsample_in
+    type: fir_filter_fff
+    width: trans_width_in
+    win: firdes.WIN_KAISER
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1552, 1052.0]
+    rotation: 0
+    state: enabled
+- name: import_0
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: from math import pi
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [176, 12]
+    rotation: 0
+    state: enabled
+- name: import_1
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import numpy as np
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [248, 12.0]
+    rotation: 0
+    state: enabled
+- name: import_1_0
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: from datetime import datetime
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [2304, 1652.0]
+    rotation: 0
+    state: enabled
+- name: inputFilterTab
+  id: qtgui_tab_widget
+  parameters:
+    alias: ''
+    comment: filter of the input
+    gui_hint: 'outOrInTab@1: 0,0,1,1'
+    label0: General Settings
+    label1: Input Signal
+    label10: Tab 10
+    label11: Tab 11
+    label12: Tab 12
+    label13: Tab 13
+    label14: Tab 14
+    label15: Tab 15
+    label16: Tab 16
+    label17: Tab 17
+    label18: Tab 18
+    label19: Tab 19
+    label2: Bandpass Sweep
+    label3: Tab 3
+    label4: Tab 4
+    label5: Tab 5
+    label6: Tab 6
+    label7: Tab 7
+    label8: Tab 8
+    label9: Tab 9
+    num_tabs: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [160, 860.0]
+    rotation: 0
+    state: enabled
+- name: inputFilterTab2
+  id: qtgui_tab_widget
+  parameters:
+    alias: ''
+    comment: filter of the input
+    gui_hint: 'outOrInTab@1: 1,0,1,1'
+    label0: Active Filter
+    label1: Input Signal
+    label10: Tab 10
+    label11: Tab 11
+    label12: Tab 12
+    label13: Tab 13
+    label14: Tab 14
+    label15: Tab 15
+    label16: Tab 16
+    label17: Tab 17
+    label18: Tab 18
+    label19: Tab 19
+    label2: Bandpass Sweep
+    label3: Tab 3
+    label4: Tab 4
+    label5: Tab 5
+    label6: Tab 6
+    label7: Tab 7
+    label8: Tab 8
+    label9: Tab 9
+    num_tabs: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [160, 964.0]
+    rotation: 0
+    state: enabled
+- name: loggerBlock
+  id: epy_block
+  parameters:
+    A_noise: A_noise_out
+    A_sig: A_out
+    _source_code: "from gnuradio import gr\nimport numpy as np\nimport pandas as pd\n\
+      import os.path\nimport time\n#from copy import copy\n\nclass blk(gr.sync_block):\n\
+      \n    def __init__(self, fname=\"log\", saveNow=0, globalEnable=0, delay=1,\
+      \ A_sig=1.0, A_noise=0.0, ftest=1000):  \n        \"\"\"\n            Creates\
+      \ a csv logfile with the header \"Asig,Anoise,Gain,SNRout,THDout,SNRin,THDin\"\
+      .\n            The file is saved in: /home/username/sdat_measurements/filename.csv\
+      \ (linux mint/ubuntu).\n            ---\n            Bennet L. Ladage\n    \
+      \        Project Work \"Sdat\"\n            2022-02-08 \n            ---   \
+      \        \n\n            input:\n                in0: Gain in dB\n         \
+      \       in1: SNR_out in dB\n                in2: THD_out in %\n            \
+      \    in3: SNR_in in dB\n                in4: THD_in in %\n\n            arguments:\n\
+      \                fname:      Filename of the csv file\n                saveNow:\
+      \    0 leads to no logfile; 1 leads to logfile\n                delay:     \
+      \ interval between the storage of a measurement; \n                        \
+      \    saving every sample leads to giant files, \n                          \
+      \  e.g., 32 bit (float) and sample rate 48 kHz --> bitrate = 32 bit x 48 kHz\
+      \ = a lot of data  \n                A_sig:      Amplitude of the testsignal\
+      \ (sine wave, saw tooth,...)\n                A_noise:    Noise amplitude\n\
+      \                ftest:      Frequency of the test signal in Hz\n\n        \
+      \    output:\n                None, it's a sink!\n        \"\"\"\n        gr.sync_block.__init__(\n\
+      \            self,\n            name='Data Logger',\n            in_sig=[(np.float32),\
+      \ (np.float32), (np.float32), (np.float32), (np.float32)], #[(np.float32, 2**10),\
+      \ (np.float32, 2**10), (np.float32, 2**10), (np.float32, 2**10), (np.float32,\
+      \ 2**10)],\n            out_sig=[(np.float32)] \n        )\n        self.fname\
+      \ = str(fname)\n        self.saveNow = saveNow\n        self.globalEnable =\
+      \ globalEnable\n        self.A_sig = A_sig\n        self.A_noise = A_noise\n\
+      \        self.ftest = ftest\n        self.delay = delay\n\n\n\n    def work(self,\
+      \ input_items, output_items):\n    \n        if self.saveNow == 1 and self.globalEnable\
+      \ == 1:\n            \n            #                                       \
+      \                            #\n            # Save file (linux mint/ubuntu):\
+      \ /home/username/sdat_measurements   #\n            #                      \
+      \                                             #\n            filename = \"sdat_measurements/\"\
+      \ + self.fname + \".csv\"\n            \n            #                     \
+      \                                              #\n            # take just the\
+      \ first sample of the array, i.e., decimation 2^4=16  #\n            #     \
+      \                                                              #\n\n#      \
+      \      gain_avg = np.mean(np.array(input_items[0][:]))\n#            snrout_avg\
+      \ = np.mean(np.array(input_items[1][:]))\n#            thdout_avg = np.mean(np.array(input_items[2][:]))\n\
+      #            snrin_avg = np.mean(np.array(input_items[3][:]))\n#           \
+      \ thdin_avg = np.mean(np.array(input_items[4][:]))\n\n            gain_avg =\
+      \ input_items[0][0]        \n            snrout_avg = input_items[1][0]\n  \
+      \          thdout_avg = input_items[2][0]\n            snrin_avg = input_items[3][0]\n\
+      \            thdin_avg = input_items[4][0]\n            \n            output_items[0][:]\
+      \ = input_items[0][0] # clear input buffer by assigning the gain to the output\n\
+      \            \n            #                                 #\n           \
+      \ # Built one row of the csv file   #\n            #                       \
+      \          #\n            onerow = {\"Asig\": [self.A_sig],\n              \
+      \       \"Anoise\": [self.A_noise],\n                     \"ftest\": [self.ftest],\
+      \      \n                     \"Gain\": [gain_avg],\n                     \"\
+      SNRout\": [snrout_avg],\n                     \"THDout\": [thdout_avg],\n  \
+      \                   \"SNRin\": [snrin_avg],\n                     \"THDin\"\
+      : [thdin_avg]}  \n            df = pd.DataFrame(onerow)\n\n            #   \
+      \                               #  \n            # Check if logfile already\
+      \ exists  #\n            #                                  #\n            if\
+      \ not os.path.exists(\"sdat_measurements\"):\n                os.makedirs(\"\
+      sdat_measurements\")\n\n            if os.path.isfile(filename):\n         \
+      \       df.to_csv(filename, mode='a', header=False, index=False)  # file exist,\
+      \ i.e., append\n            else:\n                df.to_csv(filename, index=False)\
+      \ # no file found, create new file\n            time.sleep(self.delay) # interval\
+      \ between the next storage of data \n        \n        return len(output_items[0])\
+      \     \n\n"
+    affinity: ''
+    alias: ''
+    comment: ''
+    delay: delayMeasurement
+    fname: filenameLog
+    ftest: '1000'
+    globalEnable: uiWaveOrSweep
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    saveNow: logfileChooser
+  states:
+    _io_cache: '(''Data Logger'', ''blk'', [(''fname'', "''log''"), (''saveNow'',
+      ''0''), (''globalEnable'', ''0''), (''delay'', ''1''), (''A_sig'', ''1.0''),
+      (''A_noise'', ''0.0''), (''ftest'', ''1000'')], [(''0'', ''float'', 1), (''1'',
+      ''float'', 1), (''2'', ''float'', 1), (''3'', ''float'', 1), (''4'', ''float'',
+      1)], [(''0'', ''float'', 1)], ''\n            Creates a csv logfile with the
+      header "Asig,Anoise,Gain,SNRout,THDout,SNRin,THDin".\n            The file is
+      saved in: /home/username/sdat_measurements/filename.csv (linux mint/ubuntu).\n            ---\n            Bennet
+      L. Ladage\n            Project Work "Sdat"\n            2022-02-08 \n            ---           \n\n            input:\n                in0:
+      Gain in dB\n                in1: SNR_out in dB\n                in2: THD_out
+      in %\n                in3: SNR_in in dB\n                in4: THD_in in %\n\n            arguments:\n                fname:      Filename
+      of the csv file\n                saveNow:    0 leads to no logfile; 1 leads
+      to logfile\n                delay:      interval between the storage of a measurement;
+      \n                            saving every sample leads to giant files, \n                            e.g.,
+      32 bit (float) and sample rate 48 kHz --> bitrate = 32 bit x 48 kHz = a lot
+      of data  \n                A_sig:      Amplitude of the testsignal (sine wave,
+      saw tooth,...)\n                A_noise:    Noise amplitude\n                ftest:      Frequency
+      of the test signal in Hz\n\n            output:\n                None, it\''s
+      a sink!\n        '', [''A_noise'', ''A_sig'', ''delay'', ''fname'', ''ftest'',
+      ''globalEnable'', ''saveNow''])'
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [2120, 1496.0]
+    rotation: 0
+    state: enabled
+- name: low_pass_filter_0_0
+  id: low_pass_filter
+  parameters:
+    affinity: ''
+    alias: ''
+    beta: bpRipple
+    comment: ''
+    cutoff_freq: fcutoff_in
+    decim: '1'
+    gain: '1'
+    interp: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: fsample_in
+    type: fir_filter_fff
+    width: trans_width_in
+    win: firdes.WIN_KAISER
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1552, 884.0]
+    rotation: 0
+    state: enabled
+- name: outOrInTab
+  id: qtgui_tab_widget
+  parameters:
+    alias: ''
+    comment: Output or Input Tab
+    gui_hint: 2,0,5,1
+    label0: Output Signal
+    label1: Input Signal
+    label10: Tab 10
+    label11: Tab 11
+    label12: Tab 12
+    label13: Tab 13
+    label14: Tab 14
+    label15: Tab 15
+    label16: Tab 16
+    label17: Tab 17
+    label18: Tab 18
+    label19: Tab 19
+    label2: Bandpass Sweep
+    label3: Tab 3
+    label4: Tab 4
+    label5: Tab 5
+    label6: Tab 6
+    label7: Tab 7
+    label8: Tab 8
+    label9: Tab 9
+    num_tabs: '2'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 572.0]
+    rotation: 0
+    state: enabled
+- name: qtgui_freq_sink_x_0
+  id: qtgui_freq_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'False'
+    average: '1.0'
+    axislabels: 'True'
+    bw: fsample_out
+    color1: '"blue"'
+    color10: '"dark blue"'
+    color2: '"red"'
+    color3: '"green"'
+    color4: '"black"'
+    color5: '"cyan"'
+    color6: '"magenta"'
+    color7: '"yellow"'
+    color8: '"dark red"'
+    color9: '"dark green"'
+    comment: output blue
+    ctrlpanel: 'True'
+    fc: '0'
+    fftsize: '2048'
+    freqhalf: 'False'
+    grid: 'True'
+    gui_hint: 5,1,3,2
+    label: Relative Gain
+    label1: ''
+    label10: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    legend: 'False'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: '""'
+    nconnections: '1'
+    showports: 'True'
+    tr_chan: '0'
+    tr_level: '0.0'
+    tr_mode: qtgui.TRIG_MODE_FREE
+    tr_tag: '""'
+    type: float
+    units: dB
+    update_time: '0.10'
+    width1: '1'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    wintype: firdes.WIN_KAISER
+    ymax: '10'
+    ymin: '-140'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [2336, 512.0]
+    rotation: 0
+    state: enabled
+- name: qtgui_freq_sink_x_0_0
+  id: qtgui_freq_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'False'
+    average: '1.0'
+    axislabels: 'True'
+    bw: fsample_in
+    color1: '"red"'
+    color10: '"dark blue"'
+    color2: '"red"'
+    color3: '"green"'
+    color4: '"black"'
+    color5: '"cyan"'
+    color6: '"magenta"'
+    color7: '"yellow"'
+    color8: '"dark red"'
+    color9: '"dark green"'
+    comment: input red
+    ctrlpanel: 'True'
+    fc: '0'
+    fftsize: '2048'
+    freqhalf: 'False'
+    grid: 'True'
+    gui_hint: 5,4,3,2
+    label: Relative Gain
+    label1: ''
+    label10: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    legend: 'False'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: '""'
+    nconnections: '1'
+    showports: 'True'
+    tr_chan: '0'
+    tr_level: '0.0'
+    tr_mode: qtgui.TRIG_MODE_FREE
+    tr_tag: '""'
+    type: float
+    units: dB
+    update_time: '0.10'
+    width1: '1'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    wintype: firdes.WIN_KAISER
+    ymax: '10'
+    ymin: '-140'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [2032, 976.0]
+    rotation: 0
+    state: enabled
+- name: qtgui_number_sink_0
+  id: qtgui_number_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    autoscale: 'False'
+    avg: '0'
+    color1: ("black", "black")
+    color10: ("black", "black")
+    color2: ("black", "black")
+    color3: ("black", "black")
+    color4: ("black", "black")
+    color5: ("black", "black")
+    color6: ("black", "black")
+    color7: ("black", "black")
+    color8: ("black", "black")
+    color9: ("black", "black")
+    comment: Gain in dB
+    factor1: '1'
+    factor10: '1'
+    factor2: '1'
+    factor3: '1'
+    factor4: '1'
+    factor5: '1'
+    factor6: '1'
+    factor7: '1'
+    factor8: '1'
+    factor9: '1'
+    graph_type: qtgui.NUM_GRAPH_NONE
+    gui_hint: 8,0,1,1
+    label1: '"Power Ratio Input / Output"'
+    label10: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    max: '1'
+    min: '-1'
+    name: '"Gain"'
+    nconnections: '1'
+    type: float
+    unit1: '"dB"'
+    unit10: ''
+    unit2: ''
+    unit3: ''
+    unit4: ''
+    unit5: ''
+    unit6: ''
+    unit7: ''
+    unit8: ''
+    unit9: ''
+    update_time: R_update_GUI_numbers
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [2016, 1724.0]
+    rotation: 0
+    state: enabled
+- name: qtgui_number_sink_1
+  id: qtgui_number_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    autoscale: 'False'
+    avg: '1'
+    color1: ("black", "black")
+    color10: ("black", "black")
+    color2: ("black", "black")
+    color3: ("black", "black")
+    color4: ("black", "black")
+    color5: ("black", "black")
+    color6: ("black", "black")
+    color7: ("black", "black")
+    color8: ("black", "black")
+    color9: ("black", "black")
+    comment: THD_out
+    factor1: '1'
+    factor10: '1'
+    factor2: '1'
+    factor3: '1'
+    factor4: '1'
+    factor5: '1'
+    factor6: '1'
+    factor7: '1'
+    factor8: '1'
+    factor9: '1'
+    graph_type: qtgui.NUM_GRAPH_NONE
+    gui_hint: 8,1,1,1
+    label1: Output
+    label10: ''
+    label2: Input
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    max: '0'
+    min: '-100'
+    name: '"THD+N"'
+    nconnections: '1'
+    type: float
+    unit1: '%'
+    unit10: ''
+    unit2: dB
+    unit3: ''
+    unit4: ''
+    unit5: ''
+    unit6: ''
+    unit7: ''
+    unit8: ''
+    unit9: ''
+    update_time: R_update_GUI_numbers
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1832, 1348.0]
+    rotation: 0
+    state: enabled
+- name: qtgui_number_sink_1_0
+  id: qtgui_number_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    autoscale: 'False'
+    avg: '1'
+    color1: ("black", "black")
+    color10: ("black", "black")
+    color2: ("black", "black")
+    color3: ("black", "black")
+    color4: ("black", "black")
+    color5: ("black", "black")
+    color6: ("black", "black")
+    color7: ("black", "black")
+    color8: ("black", "black")
+    color9: ("black", "black")
+    comment: THD_in
+    factor1: '1'
+    factor10: '1'
+    factor2: '1'
+    factor3: '1'
+    factor4: '1'
+    factor5: '1'
+    factor6: '1'
+    factor7: '1'
+    factor8: '1'
+    factor9: '1'
+    graph_type: qtgui.NUM_GRAPH_NONE
+    gui_hint: 8,4,1,1
+    label1: Input
+    label10: ''
+    label2: Input
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    max: '0'
+    min: '-100'
+    name: '"THD+N"'
+    nconnections: '1'
+    type: float
+    unit1: '%'
+    unit10: ''
+    unit2: dB
+    unit3: ''
+    unit4: ''
+    unit5: ''
+    unit6: ''
+    unit7: ''
+    unit8: ''
+    unit9: ''
+    update_time: R_update_GUI_numbers
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1832, 1988.0]
+    rotation: 0
+    state: enabled
+- name: qtgui_number_sink_1_1
+  id: qtgui_number_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    autoscale: 'False'
+    avg: '0'
+    color1: ("black", "black")
+    color10: ("black", "black")
+    color2: ("black", "black")
+    color3: ("black", "black")
+    color4: ("black", "black")
+    color5: ("black", "black")
+    color6: ("black", "black")
+    color7: ("black", "black")
+    color8: ("black", "black")
+    color9: ("black", "black")
+    comment: SNR_out
+    factor1: '1'
+    factor10: '1'
+    factor2: '1'
+    factor3: '1'
+    factor4: '1'
+    factor5: '1'
+    factor6: '1'
+    factor7: '1'
+    factor8: '1'
+    factor9: '1'
+    graph_type: qtgui.NUM_GRAPH_NONE
+    gui_hint: 8,2,1,1
+    label1: Output
+    label10: ''
+    label2: 'Input '
+    label3: Input2
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    max: '100'
+    min: '0'
+    name: '"SNR"'
+    nconnections: '1'
+    type: float
+    unit1: dB
+    unit10: ''
+    unit2: dB
+    unit3: dB
+    unit4: ''
+    unit5: ''
+    unit6: ''
+    unit7: ''
+    unit8: ''
+    unit9: ''
+    update_time: R_update_GUI_numbers
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1832, 1236.0]
+    rotation: 0
+    state: enabled
+- name: qtgui_number_sink_1_1_0
+  id: qtgui_number_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    autoscale: 'False'
+    avg: '0'
+    color1: ("black", "black")
+    color10: ("black", "black")
+    color2: ("black", "black")
+    color3: ("black", "black")
+    color4: ("black", "black")
+    color5: ("black", "black")
+    color6: ("black", "black")
+    color7: ("black", "black")
+    color8: ("black", "black")
+    color9: ("black", "black")
+    comment: SNR_in
+    factor1: '1'
+    factor10: '1'
+    factor2: '1'
+    factor3: '1'
+    factor4: '1'
+    factor5: '1'
+    factor6: '1'
+    factor7: '1'
+    factor8: '1'
+    factor9: '1'
+    graph_type: qtgui.NUM_GRAPH_NONE
+    gui_hint: 8,5,1,1
+    label1: Input
+    label10: ''
+    label2: 'Input '
+    label3: Input2
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    max: '100'
+    min: '0'
+    name: '"SNR"'
+    nconnections: '1'
+    type: float
+    unit1: dB
+    unit10: ''
+    unit2: dB
+    unit3: dB
+    unit4: ''
+    unit5: ''
+    unit6: ''
+    unit7: ''
+    unit8: ''
+    unit9: ''
+    update_time: R_update_GUI_numbers
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1832, 1868.0]
+    rotation: 0
+    state: enabled
+- name: qtgui_time_sink_x_0
+  id: qtgui_time_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'False'
+    axislabels: 'True'
+    color1: blue
+    color10: dark blue
+    color2: red
+    color3: green
+    color4: black
+    color5: cyan
+    color6: magenta
+    color7: yellow
+    color8: dark red
+    color9: dark green
+    comment: ''
+    ctrlpanel: 'True'
+    entags: 'True'
+    grid: 'True'
+    gui_hint: 2,1,3,2
+    label1: ''
+    label10: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    legend: 'False'
+    marker1: '-1'
+    marker10: '-1'
+    marker2: '-1'
+    marker3: '-1'
+    marker4: '-1'
+    marker5: '-1'
+    marker6: '-1'
+    marker7: '-1'
+    marker8: '-1'
+    marker9: '-1'
+    name: Audio Output
+    nconnections: '1'
+    size: '1024'
+    srate: fsample_out
+    stemplot: 'False'
+    style1: '1'
+    style10: '1'
+    style2: '1'
+    style3: '1'
+    style4: '1'
+    style5: '1'
+    style6: '1'
+    style7: '1'
+    style8: '1'
+    style9: '1'
+    tr_chan: '0'
+    tr_delay: '0'
+    tr_level: '0.0'
+    tr_mode: qtgui.TRIG_MODE_FREE
+    tr_slope: qtgui.TRIG_SLOPE_POS
+    tr_tag: '""'
+    type: float
+    update_time: '0.10'
+    width1: '1'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    ylabel: Amplitude
+    ymax: '1'
+    ymin: '-1'
+    yunit: '""'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [2336, 412.0]
+    rotation: 0
+    state: enabled
+- name: qtgui_time_sink_x_0_0
+  id: qtgui_time_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'False'
+    axislabels: 'True'
+    color1: red
+    color10: dark blue
+    color2: red
+    color3: green
+    color4: black
+    color5: cyan
+    color6: magenta
+    color7: yellow
+    color8: dark red
+    color9: dark green
+    comment: ''
+    ctrlpanel: 'True'
+    entags: 'True'
+    grid: 'True'
+    gui_hint: 2,4,3,2
+    label1: ''
+    label10: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    legend: 'False'
+    marker1: '-1'
+    marker10: '-1'
+    marker2: '-1'
+    marker3: '-1'
+    marker4: '-1'
+    marker5: '-1'
+    marker6: '-1'
+    marker7: '-1'
+    marker8: '-1'
+    marker9: '-1'
+    name: Audio Input
+    nconnections: '1'
+    size: '1024'
+    srate: fsample_in
+    stemplot: 'False'
+    style1: '1'
+    style10: '1'
+    style2: '1'
+    style3: '1'
+    style4: '1'
+    style5: '1'
+    style6: '1'
+    style7: '1'
+    style8: '1'
+    style9: '1'
+    tr_chan: '0'
+    tr_delay: '0'
+    tr_level: '0.0'
+    tr_mode: qtgui.TRIG_MODE_FREE
+    tr_slope: qtgui.TRIG_SLOPE_POS
+    tr_tag: '""'
+    type: float
+    update_time: '0.10'
+    width1: '1'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    ylabel: Amplitude
+    ymax: '1'
+    ymin: '-1'
+    yunit: '""'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [2032, 860.0]
+    rotation: 0
+    state: enabled
+- name: saw_for_sweep_0
+  id: analog_sig_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    amp: '1'
+    comment: ''
+    freq: 2*np.pi*10
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    offset: '0'
+    phase: '0'
+    samp_rate: fsample_internal
+    type: float
+    waveform: analog.GR_SAW_WAVE
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [800, 396.0]
+    rotation: 0
+    state: enabled
+- name: sweepsTab
+  id: qtgui_tab_widget
+  parameters:
+    alias: ''
+    comment: tab for sweeps
+    gui_hint: 'outOrInTab@0: 2,0,1,1'
+    label0: Frequency Sweeps
+    label1: Input Signal
+    label10: Tab 10
+    label11: Tab 11
+    label12: Tab 12
+    label13: Tab 13
+    label14: Tab 14
+    label15: Tab 15
+    label16: Tab 16
+    label17: Tab 17
+    label18: Tab 18
+    label19: Tab 19
+    label2: Bandpass Sweep
+    label3: Tab 3
+    label4: Tab 4
+    label5: Tab 5
+    label6: Tab 6
+    label7: Tab 7
+    label8: Tab 8
+    label9: Tab 9
+    num_tabs: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [160, 764.0]
+    rotation: 0
+    state: enabled
+- name: tabLogger
+  id: qtgui_tab_widget
+  parameters:
+    alias: ''
+    comment: contains GUI elements of data logger
+    gui_hint: 7,0,1,1
+    label0: Data Logger Settings
+    label1: Tab 1
+    label10: Tab 10
+    label11: Tab 11
+    label12: Tab 12
+    label13: Tab 13
+    label14: Tab 14
+    label15: Tab 15
+    label16: Tab 16
+    label17: Tab 17
+    label18: Tab 18
+    label19: Tab 19
+    label2: Tab 2
+    label3: Tab 3
+    label4: Tab 4
+    label5: Tab 5
+    label6: Tab 6
+    label7: Tab 7
+    label8: Tab 8
+    label9: Tab 9
+    num_tabs: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [2240, 1708.0]
+    rotation: 0
+    state: true
+- name: v1_path_switch1_0_1_0
+  id: epy_block
+  parameters:
+    M: '1'
+    S: uiWaveOrSweep
+    _source_code: "import numpy as np\nfrom gnuradio import gr\n\n\nclass blk(gr.sync_block):\n\
+      \n    def __init__(self, S=1, M=1):\n        \"\"\"\n            Multiply the\
+      \ input by the Kronecker Delta delta(S-M),\n            the Kronecker Delta\
+      \ is created by the heaviside function\n            \n            input:\n \
+      \               in0: x(n)\n\n            arguments:\n                S: value\
+      \ of the switch, e.g. QT GUI Chooser ID\n                M: M-th path of the\
+      \ switch\n\n            output:\n                out0: x(n) delta(S-M)\n   \
+      \         \n            \n            Implemented equations:\n            delta(S-M)\
+      \ = 1, if S = M\n                       = 0, otherwise \n            \n    \
+      \        delta(S-M) = varepsilon(S -(M+1)) - varepsilon(S -M)\n            -->\
+      \ discrete derivation of heaviside functions yields the Kronecker Delta\n  \
+      \      \"\"\"\n        gr.sync_block.__init__(\n            self,\n        \
+      \    name='delta(S-M) Switch',\n            in_sig=[np.float32],\n         \
+      \   out_sig=[np.float32]\n        )\n        self.S = S\n        self.M = M\n\
+      \n    def work(self, input_items, output_items):\n       \n        output_items[0][:]\
+      \ = input_items[0] * (np.heaviside((self.S -(self.M+1)), 1) - np.heaviside((self.S\
+      \ -self.M), -1))\n        return len(output_items[0])\n"
+    affinity: ''
+    alias: ''
+    comment: 'common waveform,
+
+      switch S_a'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    _io_cache: '(''delta(S-M) Switch'', ''blk'', [(''S'', ''1''), (''M'', ''1'')],
+      [(''0'', ''float'', 1)], [(''0'', ''float'', 1)], ''\n            Multiply the
+      input by the Kronecker Delta delta(S-M),\n            the Kronecker Delta is
+      created by the heaviside function\n            \n            input:\n                in0:
+      x(n)\n\n            arguments:\n                S: value of the switch, e.g.
+      QT GUI Chooser ID\n                M: M-th path of the switch\n\n            output:\n                out0:
+      x(n) delta(S-M)\n            \n            \n            Implemented equations:\n            delta(S-M)
+      = 1, if S = M\n                       = 0, otherwise \n            \n            delta(S-M)
+      = varepsilon(S -(M+1)) - varepsilon(S -M)\n            --> discrete derivation
+      of heaviside functions yields the Kronecker Delta\n        '', [''M'', ''S''])'
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1600, 220.0]
+    rotation: 0
+    state: enabled
+- name: v1_path_switch1_0_1_0_0
+  id: epy_block
+  parameters:
+    M: '2'
+    S: uiWaveOrSweep
+    _source_code: "import numpy as np\nfrom gnuradio import gr\n\n\nclass blk(gr.sync_block):\n\
+      \n    def __init__(self, S=1, M=1):\n        \"\"\"\n            Multiply the\
+      \ input by the Kronecker Delta delta(S-M),\n            the Kronecker Delta\
+      \ is created by the heaviside function\n            \n            input:\n \
+      \               in0: x(n)\n\n            arguments:\n                S: value\
+      \ of the switch, e.g. QT GUI Chooser ID\n                M: M-th path of the\
+      \ switch\n\n            output:\n                out0: x(n) delta(S-M)\n   \
+      \         \n            \n            Implemented equations:\n            delta(S-M)\
+      \ = 1, if S = M\n                       = 0, otherwise \n            \n    \
+      \        delta(S-M) = varepsilon(S -(M+1)) - varepsilon(S -M)\n            -->\
+      \ discrete derivation of heaviside functions yields the Kronecker Delta\n  \
+      \      \"\"\"\n        gr.sync_block.__init__(\n            self,\n        \
+      \    name='delta(S-M) Switch',\n            in_sig=[np.float32],\n         \
+      \   out_sig=[np.float32]\n        )\n        self.S = S\n        self.M = M\n\
+      \n    def work(self, input_items, output_items):\n       \n        output_items[0][:]\
+      \ = input_items[0] * (np.heaviside((self.S -(self.M+1)), 1) - np.heaviside((self.S\
+      \ -self.M), -1))\n        return len(output_items[0])\n"
+    affinity: ''
+    alias: ''
+    comment: 'classical sweep,
+
+      switch S_a'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    _io_cache: '(''delta(S-M) Switch'', ''blk'', [(''S'', ''1''), (''M'', ''1'')],
+      [(''0'', ''float'', 1)], [(''0'', ''float'', 1)], ''\n            Multiply the
+      input by the Kronecker Delta delta(S-M),\n            the Kronecker Delta is
+      created by the heaviside function\n            \n            input:\n                in0:
+      x(n)\n\n            arguments:\n                S: value of the switch, e.g.
+      QT GUI Chooser ID\n                M: M-th path of the switch\n\n            output:\n                out0:
+      x(n) delta(S-M)\n            \n            \n            Implemented equations:\n            delta(S-M)
+      = 1, if S = M\n                       = 0, otherwise \n            \n            delta(S-M)
+      = varepsilon(S -(M+1)) - varepsilon(S -M)\n            --> discrete derivation
+      of heaviside functions yields the Kronecker Delta\n        '', [''M'', ''S''])'
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1584, 428]
+    rotation: 0
+    state: enabled
+- name: v1_path_switch1_0_1_0_0_0
+  id: epy_block
+  parameters:
+    M: '3'
+    S: uiWaveOrSweep
+    _source_code: "import numpy as np\nfrom gnuradio import gr\n\n\nclass blk(gr.sync_block):\n\
+      \n    def __init__(self, S=1, M=1):\n        \"\"\"\n            Multiply the\
+      \ input by the Kronecker Delta delta(S-M),\n            the Kronecker Delta\
+      \ is created by the heaviside function\n            \n            input:\n \
+      \               in0: x(n)\n\n            arguments:\n                S: value\
+      \ of the switch, e.g. QT GUI Chooser ID\n                M: M-th path of the\
+      \ switch\n\n            output:\n                out0: x(n) delta(S-M)\n   \
+      \         \n            \n            Implemented equations:\n            delta(S-M)\
+      \ = 1, if S = M\n                       = 0, otherwise \n            \n    \
+      \        delta(S-M) = varepsilon(S -(M+1)) - varepsilon(S -M)\n            -->\
+      \ discrete derivation of heaviside functions yields the Kronecker Delta\n  \
+      \      \"\"\"\n        gr.sync_block.__init__(\n            self,\n        \
+      \    name='delta(S-M) Switch',\n            in_sig=[np.float32],\n         \
+      \   out_sig=[np.float32]\n        )\n        self.S = S\n        self.M = M\n\
+      \n    def work(self, input_items, output_items):\n       \n        output_items[0][:]\
+      \ = input_items[0] * (np.heaviside((self.S -(self.M+1)), 1) - np.heaviside((self.S\
+      \ -self.M), -1))\n        return len(output_items[0])\n"
+    affinity: ''
+    alias: ''
+    comment: 'bandpass sweep,
+
+      switch S_a'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    _io_cache: '(''delta(S-M) Switch'', ''blk'', [(''S'', ''1''), (''M'', ''1'')],
+      [(''0'', ''float'', 1)], [(''0'', ''float'', 1)], ''\n            Multiply the
+      input by the Kronecker Delta delta(S-M),\n            the Kronecker Delta is
+      created by the heaviside function\n            \n            input:\n                in0:
+      x(n)\n\n            arguments:\n                S: value of the switch, e.g.
+      QT GUI Chooser ID\n                M: M-th path of the switch\n\n            output:\n                out0:
+      x(n) delta(S-M)\n            \n            \n            Implemented equations:\n            delta(S-M)
+      = 1, if S = M\n                       = 0, otherwise \n            \n            delta(S-M)
+      = varepsilon(S -(M+1)) - varepsilon(S -M)\n            --> discrete derivation
+      of heaviside functions yields the Kronecker Delta\n        '', [''M'', ''S''])'
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1600, 620.0]
+    rotation: 0
+    state: enabled
+- name: v1_path_switch1_0_1_0_1
+  id: epy_block
+  parameters:
+    M: '1'
+    S: uiWaveOrSweep
+    _source_code: "import numpy as np\nfrom gnuradio import gr\n\n\nclass blk(gr.sync_block):\n\
+      \n    def __init__(self, S=1, M=1):\n        \"\"\"\n            Multiply the\
+      \ input by the Kronecker Delta delta(S-M),\n            the Kronecker Delta\
+      \ is created by the heaviside function\n            \n            input:\n \
+      \               in0: x(n)\n\n            arguments:\n                S: value\
+      \ of the switch, e.g. QT GUI Chooser ID\n                M: M-th path of the\
+      \ switch\n\n            output:\n                out0: x(n) delta(S-M)\n   \
+      \         \n            \n            Implemented equations:\n            delta(S-M)\
+      \ = 1, if S = M\n                       = 0, otherwise \n            \n    \
+      \        delta(S-M) = varepsilon(S -(M+1)) - varepsilon(S -M)\n            -->\
+      \ discrete derivation of heaviside functions yields the Kronecker Delta\n  \
+      \      \"\"\"\n        gr.sync_block.__init__(\n            self,\n        \
+      \    name='delta(S-M) Switch',\n            in_sig=[np.float32],\n         \
+      \   out_sig=[np.float32]\n        )\n        self.S = S\n        self.M = M\n\
+      \n    def work(self, input_items, output_items):\n       \n        output_items[0][:]\
+      \ = input_items[0] * (np.heaviside((self.S -(self.M+1)), 1) - np.heaviside((self.S\
+      \ -self.M), -1))\n        return len(output_items[0])\n"
+    affinity: ''
+    alias: ''
+    comment: 'common waveform,
+
+      switch S_a'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    _io_cache: '(''delta(S-M) Switch'', ''blk'', [(''S'', ''1''), (''M'', ''1'')],
+      [(''0'', ''float'', 1)], [(''0'', ''float'', 1)], ''\n            Multiply the
+      input by the Kronecker Delta delta(S-M),\n            the Kronecker Delta is
+      created by the heaviside function\n            \n            input:\n                in0:
+      x(n)\n\n            arguments:\n                S: value of the switch, e.g.
+      QT GUI Chooser ID\n                M: M-th path of the switch\n\n            output:\n                out0:
+      x(n) delta(S-M)\n            \n            \n            Implemented equations:\n            delta(S-M)
+      = 1, if S = M\n                       = 0, otherwise \n            \n            delta(S-M)
+      = varepsilon(S -(M+1)) - varepsilon(S -M)\n            --> discrete derivation
+      of heaviside functions yields the Kronecker Delta\n        '', [''M'', ''S''])'
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [368, 1796]
+    rotation: 0
+    state: enabled
+- name: v1_path_switch1_0_1_0_2
+  id: epy_block
+  parameters:
+    M: '1'
+    S: uiWaveOrSweep
+    _source_code: "import numpy as np\nfrom gnuradio import gr\n\n\nclass blk(gr.sync_block):\n\
+      \n    def __init__(self, S=1, M=1):\n        \"\"\"\n            Multiply the\
+      \ input by the Kronecker Delta delta(S-M),\n            the Kronecker Delta\
+      \ is created by the heaviside function\n            \n            input:\n \
+      \               in0: x(n)\n\n            arguments:\n                S: value\
+      \ of the switch, e.g. QT GUI Chooser ID\n                M: M-th path of the\
+      \ switch\n\n            output:\n                out0: x(n) delta(S-M)\n   \
+      \         \n            \n            Implemented equations:\n            delta(S-M)\
+      \ = 1, if S = M\n                       = 0, otherwise \n            \n    \
+      \        delta(S-M) = varepsilon(S -(M+1)) - varepsilon(S -M)\n            -->\
+      \ discrete derivation of heaviside functions yields the Kronecker Delta\n  \
+      \      \"\"\"\n        gr.sync_block.__init__(\n            self,\n        \
+      \    name='delta(S-M) Switch',\n            in_sig=[np.float32],\n         \
+      \   out_sig=[np.float32]\n        )\n        self.S = S\n        self.M = M\n\
+      \n    def work(self, input_items, output_items):\n       \n        output_items[0][:]\
+      \ = input_items[0] * (np.heaviside((self.S -(self.M+1)), 1) - np.heaviside((self.S\
+      \ -self.M), -1))\n        return len(output_items[0])\n"
+    affinity: ''
+    alias: ''
+    comment: 'common waveform,
+
+      switch S_a'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    _io_cache: '(''delta(S-M) Switch'', ''blk'', [(''S'', ''1''), (''M'', ''1'')],
+      [(''0'', ''float'', 1)], [(''0'', ''float'', 1)], ''\n            Multiply the
+      input by the Kronecker Delta delta(S-M),\n            the Kronecker Delta is
+      created by the heaviside function\n            \n            input:\n                in0:
+      x(n)\n\n            arguments:\n                S: value of the switch, e.g.
+      QT GUI Chooser ID\n                M: M-th path of the switch\n\n            output:\n                out0:
+      x(n) delta(S-M)\n            \n            \n            Implemented equations:\n            delta(S-M)
+      = 1, if S = M\n                       = 0, otherwise \n            \n            delta(S-M)
+      = varepsilon(S -(M+1)) - varepsilon(S -M)\n            --> discrete derivation
+      of heaviside functions yields the Kronecker Delta\n        '', [''M'', ''S''])'
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [424, 1412]
+    rotation: 0
+    state: enabled
+- name: v1_path_switch1_0_1_0_3
+  id: epy_block
+  parameters:
+    M: '1'
+    S: whichFilterIn
+    _source_code: "import numpy as np\nfrom gnuradio import gr\n\n\nclass blk(gr.sync_block):\n\
+      \n    def __init__(self, S=1, M=1):\n        \"\"\"\n            Multiply the\
+      \ input by the Kronecker Delta delta(S-M),\n            the Kronecker Delta\
+      \ is created by the heaviside function\n            \n            input:\n \
+      \               in0: x(n)\n\n            arguments:\n                S: value\
+      \ of the switch, e.g. QT GUI Chooser ID\n                M: M-th path of the\
+      \ switch\n\n            output:\n                out0: x(n) delta(S-M)\n   \
+      \         \n            \n            Implemented equations:\n            delta(S-M)\
+      \ = 1, if S = M\n                       = 0, otherwise \n            \n    \
+      \        delta(S-M) = varepsilon(S -(M+1)) - varepsilon(S -M)\n            -->\
+      \ discrete derivation of heaviside functions yields the Kronecker Delta\n  \
+      \      \"\"\"\n        gr.sync_block.__init__(\n            self,\n        \
+      \    name='delta(S-M) Switch',\n            in_sig=[np.float32],\n         \
+      \   out_sig=[np.float32]\n        )\n        self.S = S\n        self.M = M\n\
+      \n    def work(self, input_items, output_items):\n       \n        output_items[0][:]\
+      \ = input_items[0] * (np.heaviside((self.S -(self.M+1)), 1) - np.heaviside((self.S\
+      \ -self.M), -1))\n        return len(output_items[0])\n"
+    affinity: ''
+    alias: ''
+    comment: 'gain only,
+
+      switch S_b'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    _io_cache: '(''delta(S-M) Switch'', ''blk'', [(''S'', ''1''), (''M'', ''1'')],
+      [(''0'', ''float'', 1)], [(''0'', ''float'', 1)], ''\n            Multiply the
+      input by the Kronecker Delta delta(S-M),\n            the Kronecker Delta is
+      created by the heaviside function\n            \n            input:\n                in0:
+      x(n)\n\n            arguments:\n                S: value of the switch, e.g.
+      QT GUI Chooser ID\n                M: M-th path of the switch\n\n            output:\n                out0:
+      x(n) delta(S-M)\n            \n            \n            Implemented equations:\n            delta(S-M)
+      = 1, if S = M\n                       = 0, otherwise \n            \n            delta(S-M)
+      = varepsilon(S -(M+1)) - varepsilon(S -M)\n            --> discrete derivation
+      of heaviside functions yields the Kronecker Delta\n        '', [''M'', ''S''])'
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1360, 796.0]
+    rotation: 0
+    state: enabled
+- name: v1_path_switch1_0_1_0_3_0
+  id: epy_block
+  parameters:
+    M: '2'
+    S: whichFilterIn
+    _source_code: "import numpy as np\nfrom gnuradio import gr\n\n\nclass blk(gr.sync_block):\n\
+      \n    def __init__(self, S=1, M=1):\n        \"\"\"\n            Multiply the\
+      \ input by the Kronecker Delta delta(S-M),\n            the Kronecker Delta\
+      \ is created by the heaviside function\n            \n            input:\n \
+      \               in0: x(n)\n\n            arguments:\n                S: value\
+      \ of the switch, e.g. QT GUI Chooser ID\n                M: M-th path of the\
+      \ switch\n\n            output:\n                out0: x(n) delta(S-M)\n   \
+      \         \n            \n            Implemented equations:\n            delta(S-M)\
+      \ = 1, if S = M\n                       = 0, otherwise \n            \n    \
+      \        delta(S-M) = varepsilon(S -(M+1)) - varepsilon(S -M)\n            -->\
+      \ discrete derivation of heaviside functions yields the Kronecker Delta\n  \
+      \      \"\"\"\n        gr.sync_block.__init__(\n            self,\n        \
+      \    name='delta(S-M) Switch',\n            in_sig=[np.float32],\n         \
+      \   out_sig=[np.float32]\n        )\n        self.S = S\n        self.M = M\n\
+      \n    def work(self, input_items, output_items):\n       \n        output_items[0][:]\
+      \ = input_items[0] * (np.heaviside((self.S -(self.M+1)), 1) - np.heaviside((self.S\
+      \ -self.M), -1))\n        return len(output_items[0])\n"
+    affinity: ''
+    alias: ''
+    comment: 'gain and LP,
+
+      switch S_b'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    _io_cache: '(''delta(S-M) Switch'', ''blk'', [(''S'', ''1''), (''M'', ''1'')],
+      [(''0'', ''float'', 1)], [(''0'', ''float'', 1)], ''\n            Multiply the
+      input by the Kronecker Delta delta(S-M),\n            the Kronecker Delta is
+      created by the heaviside function\n            \n            input:\n                in0:
+      x(n)\n\n            arguments:\n                S: value of the switch, e.g.
+      QT GUI Chooser ID\n                M: M-th path of the switch\n\n            output:\n                out0:
+      x(n) delta(S-M)\n            \n            \n            Implemented equations:\n            delta(S-M)
+      = 1, if S = M\n                       = 0, otherwise \n            \n            delta(S-M)
+      = varepsilon(S -(M+1)) - varepsilon(S -M)\n            --> discrete derivation
+      of heaviside functions yields the Kronecker Delta\n        '', [''M'', ''S''])'
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1360, 924.0]
+    rotation: 0
+    state: enabled
+- name: v1_path_switch1_0_1_0_3_0_0
+  id: epy_block
+  parameters:
+    M: '3'
+    S: whichFilterIn
+    _source_code: "import numpy as np\nfrom gnuradio import gr\n\n\nclass blk(gr.sync_block):\n\
+      \n    def __init__(self, S=1, M=1):\n        \"\"\"\n            Multiply the\
+      \ input by the Kronecker Delta delta(S-M),\n            the Kronecker Delta\
+      \ is created by the heaviside function\n            \n            input:\n \
+      \               in0: x(n)\n\n            arguments:\n                S: value\
+      \ of the switch, e.g. QT GUI Chooser ID\n                M: M-th path of the\
+      \ switch\n\n            output:\n                out0: x(n) delta(S-M)\n   \
+      \         \n            \n            Implemented equations:\n            delta(S-M)\
+      \ = 1, if S = M\n                       = 0, otherwise \n            \n    \
+      \        delta(S-M) = varepsilon(S -(M+1)) - varepsilon(S -M)\n            -->\
+      \ discrete derivation of heaviside functions yields the Kronecker Delta\n  \
+      \      \"\"\"\n        gr.sync_block.__init__(\n            self,\n        \
+      \    name='delta(S-M) Switch',\n            in_sig=[np.float32],\n         \
+      \   out_sig=[np.float32]\n        )\n        self.S = S\n        self.M = M\n\
+      \n    def work(self, input_items, output_items):\n       \n        output_items[0][:]\
+      \ = input_items[0] * (np.heaviside((self.S -(self.M+1)), 1) - np.heaviside((self.S\
+      \ -self.M), -1))\n        return len(output_items[0])\n"
+    affinity: ''
+    alias: ''
+    comment: 'gain and HP,
+
+      switch S_b'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    _io_cache: '(''delta(S-M) Switch'', ''blk'', [(''S'', ''1''), (''M'', ''1'')],
+      [(''0'', ''float'', 1)], [(''0'', ''float'', 1)], ''\n            Multiply the
+      input by the Kronecker Delta delta(S-M),\n            the Kronecker Delta is
+      created by the heaviside function\n            \n            input:\n                in0:
+      x(n)\n\n            arguments:\n                S: value of the switch, e.g.
+      QT GUI Chooser ID\n                M: M-th path of the switch\n\n            output:\n                out0:
+      x(n) delta(S-M)\n            \n            \n            Implemented equations:\n            delta(S-M)
+      = 1, if S = M\n                       = 0, otherwise \n            \n            delta(S-M)
+      = varepsilon(S -(M+1)) - varepsilon(S -M)\n            --> discrete derivation
+      of heaviside functions yields the Kronecker Delta\n        '', [''M'', ''S''])'
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1360, 1092.0]
+    rotation: 0
+    state: enabled
+- name: virtual_sink_0
+  id: virtual_sink
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: output_path
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [2056, 372.0]
+    rotation: 0
+    state: enabled
+- name: virtual_sink_0_0
+  id: virtual_sink
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: input_path
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [2032, 796.0]
+    rotation: 0
+    state: enabled
+- name: virtual_source_0_1
+  id: virtual_source
+  parameters:
+    alias: ''
+    comment: 'input r(n)=s(n)+w(n):
+
+      compute SNR and THD+N'
+    stream_id: input_path
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [176, 1804]
+    rotation: 0
+    state: enabled
+- name: virtual_source_0_1_0
+  id: virtual_source
+  parameters:
+    alias: ''
+    comment: 'output s(n):
+
+      compute SNR and THD+N'
+    stream_id: output_path
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [216, 1420]
+    rotation: 0
+    state: enabled
+
+connections:
+- [analog_noise_source_x_0, '0', blocks_add_xx_0, '1']
+- [analog_sig_source_x_0, '0', blk_oscillate_around_0, '0']
+- [audio_source_0, '0', blocks_multiply_const_xx_1, '0']
+- [blk_oscillate_around_0, '0', blocks_add_xx_0, '0']
+- [blk_oscillate_around_0_0, '0', loggerBlock, '0']
+- [blk_oscillate_around_0_0, '0', qtgui_number_sink_0, '0']
+- [blocks_add_xx_0, '0', v1_path_switch1_0_1_0, '0']
+- [blocks_add_xx_1, '0', channels_quantizer_0_0, '0']
+- [blocks_add_xx_1_0, '0', channels_quantizer_0, '0']
+- [blocks_complex_to_mag_0, '0', const_out_max_2_0, '0']
+- [blocks_complex_to_mag_0_0, '0', const_out_max_2_0_1, '0']
+- [blocks_divide_xx_0, '0', blocks_nlog10_ff_1, '0']
+- [blocks_multiply_const_xx_1, '0', v1_path_switch1_0_1_0_3, '0']
+- [blocks_multiply_const_xx_1, '0', v1_path_switch1_0_1_0_3_0, '0']
+- [blocks_multiply_const_xx_1, '0', v1_path_switch1_0_1_0_3_0_0, '0']
+- [blocks_multiply_const_xx_2, '0', v1_path_switch1_0_1_0_0, '0']
+- [blocks_multiply_const_xx_2_0, '0', v1_path_switch1_0_1_0_0_0, '0']
+- [blocks_nlog10_ff_1, '0', blk_oscillate_around_0_0, '0']
+- [blocks_stream_to_vector_0, '0', fft_vxx_0, '0']
+- [blocks_stream_to_vector_0_0, '0', fft_vxx_0_0, '0']
+- [blocks_vco_f_0, '0', const_out_max_1_0_0, '0']
+- [blocks_vco_f_0, '0', const_out_max_1_0_0_0, '0']
+- [channels_quantizer_0, '0', audio_sink_0, '0']
+- [channels_quantizer_0, '0', qtgui_freq_sink_x_0, '0']
+- [channels_quantizer_0, '0', qtgui_time_sink_x_0, '0']
+- [channels_quantizer_0, '0', virtual_sink_0, '0']
+- [channels_quantizer_0_0, '0', qtgui_freq_sink_x_0_0, '0']
+- [channels_quantizer_0_0, '0', qtgui_time_sink_x_0_0, '0']
+- [channels_quantizer_0_0, '0', virtual_sink_0_0, '0']
+- [const_out_max_1_0_0, '0', blocks_multiply_const_xx_2_0, '0']
+- [const_out_max_1_0_0_0, '0', blocks_multiply_const_xx_2, '0']
+- [const_out_max_2_0, '0', loggerBlock, '3']
+- [const_out_max_2_0, '0', qtgui_number_sink_1_1_0, '0']
+- [const_out_max_2_0, '1', loggerBlock, '4']
+- [const_out_max_2_0, '1', qtgui_number_sink_1_0, '0']
+- [const_out_max_2_0, '2', blocks_divide_xx_0, '0']
+- [const_out_max_2_0_1, '0', loggerBlock, '1']
+- [const_out_max_2_0_1, '0', qtgui_number_sink_1_1, '0']
+- [const_out_max_2_0_1, '1', loggerBlock, '2']
+- [const_out_max_2_0_1, '1', qtgui_number_sink_1, '0']
+- [const_out_max_2_0_1, '2', blocks_divide_xx_0, '1']
+- [fft_vxx_0, '0', blocks_complex_to_mag_0, '0']
+- [fft_vxx_0_0, '0', blocks_complex_to_mag_0_0, '0']
+- [high_pass_filter_0, '0', blocks_add_xx_1, '2']
+- [loggerBlock, '0', blocks_null_sink_0, '0']
+- [low_pass_filter_0_0, '0', blocks_add_xx_1, '1']
+- [saw_for_sweep_0, '0', blocks_vco_f_0, '0']
+- [v1_path_switch1_0_1_0, '0', blocks_add_xx_1_0, '0']
+- [v1_path_switch1_0_1_0_0, '0', blocks_add_xx_1_0, '1']
+- [v1_path_switch1_0_1_0_0_0, '0', blocks_add_xx_1_0, '2']
+- [v1_path_switch1_0_1_0_1, '0', blocks_stream_to_vector_0, '0']
+- [v1_path_switch1_0_1_0_2, '0', blocks_stream_to_vector_0_0, '0']
+- [v1_path_switch1_0_1_0_3, '0', blocks_add_xx_1, '0']
+- [v1_path_switch1_0_1_0_3_0, '0', low_pass_filter_0_0, '0']
+- [v1_path_switch1_0_1_0_3_0_0, '0', high_pass_filter_0, '0']
+- [virtual_source_0_1, '0', v1_path_switch1_0_1_0_1, '0']
+- [virtual_source_0_1_0, '0', v1_path_switch1_0_1_0_2, '0']
+
+metadata:
+  file_format: 1
