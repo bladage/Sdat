@@ -4,7 +4,7 @@
 ![Sdat](https://user-images.githubusercontent.com/51378715/155023860-69fc6134-5d5b-47a6-b15f-be6d85821699.png)
 
 ### Features:
-- Signal generator: sine, rectangle, saw tooth, triangle, frequency sweeps
+- Signal generator: sine, rectangle, saw tooth, triangle, frequency sweeps, white noise
 - Adjustable quantization of the signals
 - Output and input signals: Time scope and FFT spectrum
 - SNR, THD+N, gain measurements
