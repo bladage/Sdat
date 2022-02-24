@@ -18,18 +18,24 @@
 
 ### *Development of an Application to Measure the Quality of Audio Devices using GNU Radio by Bennet L. Ladage*
 
-This thesis represents a system concept which determines quality indicators of audio devices.
-It is implemented by GNU Radio, but the concept is described in a way that other software
-and hardware can realize this system, too. 
+This thesis represents a system concept which determines quality indicators of audio devices. It
+is implemented by GNU Radio, but the concept is described in a way that other software and
+hardware can realize this system, too. 
 
-The considered indicators are the transfer function, 
-the signal-to-noise ratio (SNR), the total harmonic distortion (THD), the gain, and the linear
-dynamic range (LDR) of audio equipment. The presented implementation uses the sound card
-of a personal computer (PC) as a measuring instrument. The input of the device under test
-(DUT) is connected to the sound card’s output and the DUT’s output is wired to the sound card’s
+GNU Radio is chosen as the development environment
+because it is available for all main operating system (i.e., Windows, Linux, and Mac) and due
+to its open source license. This software has access to the sound card of the personal computer
+(PC) which is used as an input/output interface for real world signals. Thus, it transfers the PC
+into a measuring instrument. Hence, the second main topic is whether the quality of a common
+sound card is sufficient that the PC is suitable to measure audio devices.
+
+The considered quality indicators are the transfer function, the signal-to-noise ratio (SNR),
+the total harmonic distortion (THD), the gain, and the linear dynamic range (LDR) of audio
+equipment. If we want to measure an external audio device, we connect the input of the device
+under test (DUT) to the sound card’s output, and the DUT’s output is wired to the sound card’s
 input. This approach is a black-box testing method. For example, equipment like amplifiers,
 equalizers, mixing consoles, filters, crossover networks, and analog-to-digital (A/D) or digital-to-
-analog converters (D/A) can be inspected. However, the test concepts are not adequate
+analog converters (D/A) can be inspected. However, the following test concepts are not adequate
 for the perceived audio quality of devices which uses low bit rate coding schemes. In addition,
 the system has got a signal generator, a data logger for the quality indicators, an adjustable
 digital input filter, and a time domain and frequency domain display of the output and input
