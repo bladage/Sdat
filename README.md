@@ -26,7 +26,7 @@ GNU Radio is chosen as the development environment
 because it is available for all main operating system (i.e., Windows, Linux, and Mac) and due
 to its open source license. This software has access to the sound card of the personal computer
 (PC) which is used as an input/output interface for real world signals. Thus, it transfers the PC
-into a measuring instrument. Hence, the second main topic is whether the quality of a common
+into a measuring instrument. The second main topic is hence whether the quality of a common
 sound card is sufficient that the PC is suitable to measure audio devices.
 
 The considered quality indicators are the transfer function, the signal-to-noise ratio (SNR),
